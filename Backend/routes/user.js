@@ -6,7 +6,7 @@ const userUtils = require("./utils/userUtils");
 
 
 
-router.get("/random", (req, res) => {
+router.get("/followers", (req, res) => {
 
     userUtils
     .followers()

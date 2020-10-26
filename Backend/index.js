@@ -21,9 +21,9 @@ const cors = require("cors");
 
 
 //routes importing
-const auth = require("./routes/auth");
+//const auth = require("./routes/auth");
 const user = require("./routes/user");
-const recipes = require("./routes/recipes");
+const tweet = require("./routes/tweet");
 
 
 //app settings
@@ -73,7 +73,7 @@ app.get("/alive", (req, res) => {
 //routing
 app.use("/user",user);
 app.use("/tweet",tweet);
-app.use(auth);
+//app.use(auth);
 
 //default router
 app.use((req, res) => {

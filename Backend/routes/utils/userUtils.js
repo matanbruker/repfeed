@@ -16,9 +16,12 @@ let followers = await axios.get(`${users_api_url}/list.json?cursor=-1&screen_nam
  }
 })
 
-console.log(followers);
-console.log(followers.data);
-console.log(followers.data.users);
+//console.log(followers);
+//console.log(followers.data);
+//console.log(followers.data.users);
+
+const users_data = followers.data
+return users_data
 //console.log(followers[data][users]);
 
 }

@@ -10,7 +10,7 @@ router.get("/followers", (req, res) => {
 
     userUtils
     .followers()
-    .then((info_array) => res.send(info_array))
+    .then((users_data) => res.send(users_data))
     .catch((error) => {
         console.log(error);
         res.sendStatus(404);

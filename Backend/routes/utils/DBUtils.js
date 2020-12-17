@@ -41,4 +41,12 @@ async function cheekUserIDinDB(user_id){
     return db_answer;
 }
 
+async function getUsersByScore(score){
+  let db_answer = await execQuery("select user_id from users where score = '"+score+"'");
+  return db_answer;
+}
+
+
 exports.cheekUserIDinDB = cheekUserIDinDB;
+exports.getUsersByScore = getUsersByScore;
+

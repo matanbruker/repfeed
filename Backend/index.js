@@ -18,7 +18,7 @@ const path = require("path");
 const cors = require("cors");
 
 
-
+//#TODO : change to repFeed and Population
 
 //routes importing
 //const auth = require("./routes/auth");
@@ -69,6 +69,7 @@ app.get("/alive", (req, res) => {
     res.send("I'm alive");
 });
 
+//#TODO : change to repFeed and Population
 
 //routing
 app.use("/user",user);

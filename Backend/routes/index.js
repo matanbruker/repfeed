@@ -22,8 +22,8 @@ const cors = require("cors");
 
 //routes importing
 //const auth = require("./routes/auth");
-const repFeed = require("./routes/repFeed");
-const Population = require("./routes/Population");
+const repFeed = require("./routes/user");
+const Population = require("./routes/tweet");
 
 
 //app settings

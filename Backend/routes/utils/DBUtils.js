@@ -41,13 +41,18 @@ execQuery().catch((error) => console.log(`Error in executing ${error}`));
 
 // =============== Queries ===============
 
-async function cheekUserIDinDB(user_id){
-    let db_answer = await execQuery("select * from users where user_id = '"+user_id+"'");
-    return db_answer;
-}
+// async function cheekUserIDinDB(user_id){
+//     let db_answer = await execQuery("select * from users where user_id = '"+user_id+"'");
+//     return db_answer;
+// }
 
 async function getUsersByScore(score){
   let db_answer = await execQuery("select user_id from users where score = '"+score+"'");
+  return db_answer;
+}
+
+async function getUserFreinds(user_id){
+  let db_answer = await execQuery("select friend_uid from friendships where panel_uid  = '"+user_id+"'");
   return db_answer;
 }
 

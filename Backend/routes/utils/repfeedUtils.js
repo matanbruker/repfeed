@@ -36,30 +36,38 @@ async function getUsersByScore(req) {
   let score = req.param
 
   // go to DB - get all the users with this score
-  let users = DBUtils.getUsersByScore(score)
+  let users_IDS = DBUtils.getUsersByScore(score)
 
-  return users
+  return users_IDS
 
 }
 
-async function getUsersFollowedUsers(users) {
+async function getUsersFreinds(users_IDS) {
 
-  let followed_users = []
-  let followed_users_for_specific_user = []
+  let friends_IDs = []
+  let friends_of_user = []
 
   // for each user we take its followed users
-  users.forEach(user => {
+  users_IDS.forEach(user_id => {
 
     //get this user the users that he followed
     // TODO: maybe take followers from twitter API
-    followed_users_for_specific_user = DBUtils.getUserItsFollowedUsers(user)
-    followed_users.push(followed_users_for_specific_user)
+    friends_of_user = DBUtils.getUserFreinds(user_id)
+
+    friends_of_user.forEach(friend => {
+
+      if(!friends_IDs.includes(friend)){
+          friends_IDs.push(friend)
+      }
+    });
 
   });
 
-  return followed_users
+  return friends_IDs
 
 }
+
+
 
 async function getUsersTweetsID(users) {
 
@@ -71,8 +79,9 @@ async function getUsersTweetsID(users) {
     
   });
 
-
 }
+
+
 
 
 

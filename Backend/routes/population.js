@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 const axios = require("axios");
 
-const tweetUtils = require("./utils/tweetUtils");
+const populationUtils = require("./utils/populationUtils");
 
 //need to add the right domai
 const api_domain = "https://api.spoonacular.com/recipes";

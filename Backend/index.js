@@ -22,8 +22,8 @@ const cors = require("cors");
 
 //routes importing
 //const auth = require("./routes/auth");
-const user = require("./routes/user");
-const tweet = require("./routes/tweet");
+const repfeed = require("./routes/repfeed");
+const population = require("./routes/population");
 
 
 //app settings
@@ -72,8 +72,8 @@ app.get("/alive", (req, res) => {
 //#TODO : change to repFeed and Population
 
 //routing
-app.use("/user",user);
-app.use("/tweet",tweet);
+app.use("/repfeed",repfeed);
+app.use("/population",population);
 //app.use(auth);
 
 //default router

@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-const userUtils = require("./utils/userUtils");
+const repfeedUtils = require("./utils/repfeedUtils");
 const DBUtils = require("./utils/DBUtils");
 
 
@@ -9,7 +9,7 @@ const DBUtils = require("./utils/DBUtils");
 
 router.get("/followers", (req, res) => {
 
-    userUtils
+    repfeedUtils
     .followers()
     .then((users_data) => res.send(users_data))
     .catch((error) => {
@@ -21,7 +21,7 @@ router.get("/followers", (req, res) => {
 
   router.get("/", (req, res) => {
 
-    userUtils
+    repfeedUtils
     .getTweetByScore(req)
     .then((users_data) => res.send(users_data))
     .catch((error) => {

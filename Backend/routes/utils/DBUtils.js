@@ -63,6 +63,23 @@ async function getUserTweetsIds(user_id){
 }
 
 
+// TODO - check how to deal with empty filters, what the WHERE in SQL QUERY should get
+async function getUsersFriendsByFilters(age, country, party, gender, race) {
+  let db_answer = await execQuery(
+    "select distinct friend_uid from friendships where age  = '" + age +
+      "' and country  = '" +
+      country +
+      "' and party  = '" +
+      party +
+      "' and gender  = '" +
+      gender +
+      "' and race  = '" +
+      race +
+      "'"
+  );
+  return db_answer;
+}
+
 
 exports.cheekUserIDinDB = cheekUserIDinDB;
 exports.getUsersByScore = getUsersByScore;

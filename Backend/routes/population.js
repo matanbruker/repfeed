@@ -1,19 +1,27 @@
-var temp = []
 var express = require("express");
 var router = express.Router();
-const axios = require("axios");
 
 const populationUtils = require("./utils/populationUtils");
-
-//need to add the right domai
-const api_domain = "https://api.spoonacular.com/recipes";
+const DBUtils = require("./utils/DBUtils");
 
 
-router.use((req,res,next) => {
-    console.log("Tweet route");
-    next();
-});
-
-
-
-module.exports = router;
+router.get("/populationFeed", (req, res) => {
+    if(req.moreTweets == false){
+        populationUtils
+        .buildPopulationFeedByFilters(req.age, req.country, req.party, req.gender, req.race)
+        .then((tweets_text) => res.send(tweets_text))
+        .catch((error) => {
+            console.log(error);
+            res.sendStatus(404);
+        });
+    }else{
+        populationUtils
+        .showTweets()
+        .then((tweets_text) => res.send(tweets_text))
+        .catch((error) => {
+            console.log(error);
+            res.sendStatus(404);
+        });
+    }
+    );
+}

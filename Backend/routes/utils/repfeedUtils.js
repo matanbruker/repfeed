@@ -30,6 +30,54 @@ return users_data
 }
 
 
+async function getUsersByScore(req) {
+
+  // get the score from the front
+  let score = req.param
+
+  // go to DB - get all the users with this score
+  let users = DBUtils.getUsersByScore(score)
+
+  return users
+
+}
+
+async function getUsersFollowedUsers(users) {
+
+  let followed_users = []
+  let followed_users_for_specific_user = []
+
+  // for each user we take its followed users
+  users.forEach(user => {
+
+    //get this user the users that he followed
+    // TODO: maybe take followers from twitter API
+    followed_users_for_specific_user = DBUtils.getUserItsFollowedUsers(user)
+    followed_users.push(followed_users_for_specific_user)
+
+  });
+
+  return followed_users
+
+}
+
+async function getUsersTweetsID(users) {
+
+  let tweets_IDs = []
+
+  users.forEach(user => {
+
+    tweets_IDs_for_specific_user = 
+    
+  });
+
+
+}
+
+
+
+
+
 //jast a try - not working function (showing itay)
 async function getTweetByScore(req) {
   //   let followers = await axios.get(`${users_api_url}
@@ -37,8 +85,9 @@ async function getTweetByScore(req) {
     
   score = req.param
 
-  // go to DB
+  // go to DB - get all the users with this score
   users = DBUtils.getUsersByScore(score)
+
 
   ////////////////////////////////////////////////////////////////////
   let followers = await axios.get(`${users_api_url}/list.json?cursor=-1&screen_name=realDonaldTrump&skip_status=true&include_user_entities=false`, {

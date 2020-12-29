@@ -56,6 +56,13 @@ async function getUserFreinds(user_id){
   return db_answer;
 }
 
+// order tweet date from the newest to the oldest
+async function getUserTweetsIds(user_id){
+  let db_answer = await execQuery("select tweet_id from urls where user_id  = '"+user_id+"' ORDER BY tweet_date ASC");
+  return db_answer;
+}
+
+
 
 exports.cheekUserIDinDB = cheekUserIDinDB;
 exports.getUsersByScore = getUsersByScore;

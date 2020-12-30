@@ -4,7 +4,7 @@ var router = express.Router();
 const repfeedUtils = require("./utils/repfeedUtils");
 const DBUtils = require("./utils/DBUtils");
 
-router.get("/repFeed", (req, res) => {
+router.get("/repFeed/:score", (req, res) => {
   if (req.moreTweets == false) {
     if (req.score != null) {
       repfeedUtils

@@ -5,10 +5,10 @@ const repfeedUtils = require("./utils/repfeedUtils");
 const DBUtils = require("./utils/DBUtils");
 
 router.get("/repFeed/:score", (req, res) => {
-  if (req.moreTweets == false) {
-    if (req.score != null) {
+
+    if (req.params != null) {
       repfeedUtils
-        .buildRepFeedByBar(req.score)
+        .buildRepFeedByBar(req.params)
         .then((tweets_text) => res.send(tweets_text))
         .catch((error) => {
           console.log(error);
@@ -23,18 +23,17 @@ router.get("/repFeed/:score", (req, res) => {
           res.sendStatus(404);
         });
     }
-  } else {
-    // if(req.score != null){
-    repfeedUtils
-      .showTweets()
-      .then((tweets_text) => res.send(tweets_text))
-      .catch((error) => {
-        console.log(error);
-        res.sendStatus(404);
-      });
+    // // if(req.score != null){
+    // repfeedUtils
+    //   .showTweets()
+    //   .then((tweets_text) => res.send(tweets_text))
+    //   .catch((error) => {
+    //     console.log(error);
+    //     res.sendStatus(404);
+    //   });
 
-    // }
-  }
+    // // }
+  
 });
 
 // router.get("/", (req, res) => {

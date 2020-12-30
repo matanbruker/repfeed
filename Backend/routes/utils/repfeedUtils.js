@@ -38,6 +38,8 @@ async function getUsersFreinds(users_IDS) {
 
   return friends_IDs;
 }
+//
+
 
 async function getUsersTweetsID(users_IDS) {
   let tweets_IDs = [];

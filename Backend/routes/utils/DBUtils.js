@@ -65,17 +65,34 @@ async function getUserTweetsIds(user_id){
 
 // TODO - check how to deal with empty filters, what the WHERE in SQL QUERY should get
 async function getUsersFriendsByFilters(age, country, party, gender, race) {
+  let sql_age = "'" + age + "'";
+  let sql_country = "'" + country + "'";
+  let sql_party = "'" + party + "'";
+  let sql_gender = "'" + gender + "'";
+  let sql_race = "'" + race + "'";
+
+  if (age === "*"){
+    sql_age = "age";
+  }
+  if (country === "*") {
+    sql_country = "state_code";
+  }
+  if (party === "*") {
+    sql_party = "party";
+  }
+  if (gender === "*") {
+    sql_gender = "sex";
+  }
+  if (race === "*") {
+    sql_race = "race_ethnicity";
+  }
+
   let db_answer = await execQuery(
-    "select distinct friend_uid from friendships where age  = '" + age +
-      "' and country  = '" +
-      country +
-      "' and party  = '" +
-      party +
-      "' and gender  = '" +
-      gender +
-      "' and race  = '" +
-      race +
-      "'"
+    "select distinct friend_uid from friendships where age  = " + sql_age +
+      " and state_code  = " + sql_country +
+      " and party  = " + sql_party +
+      " and sex  = " + sql_gender +
+      " and race_ethnicity  = " + sql_race
   );
   return db_answer;
 }

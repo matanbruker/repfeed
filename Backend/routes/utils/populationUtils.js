@@ -67,7 +67,13 @@ async function getTweetsFromTwitterAPI(show_tweets) {
 }
 
 
-async function buildPopulationFeedByFilters(age, country, party, gender, race) {
+async function buildPopulationFeedByFilters(param) {
+  let age = param.age;
+  let country = param.country;
+  let party = param.party;
+  let gender = param.gender;
+  let race = param.race;
+
   tweets_IDs = [];
 
   friends_IDS = getUsersFriendsByFilters(age, country, party, gender, race);

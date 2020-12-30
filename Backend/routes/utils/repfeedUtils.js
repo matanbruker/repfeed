@@ -8,26 +8,6 @@ const DBUtils = require("./DBUtils");
 
 let tweets_IDs = [];
 
-// async function followers() {
-// //   let followers = await axios.get(`${users_api_url}
-// // /list.json?cursor=-1&screen_name=realDonaldTrump&skip_status=true&include_user_entities=false`);
-
-// ////////////////////////////////////////////////////////////////////
-// let followers = await axios.get(`${users_api_url}/list.json?cursor=-1&screen_name=realDonaldTrump&skip_status=true&include_user_entities=false`, {
-//  headers: {
-//    Authorization: 'Bearer ' + token //the token is a variable which holds the token
-//  }
-// })
-
-// //console.log(followers);
-// //console.log(followers.data);
-// //console.log(followers.data.users);
-
-// const users_data = followers.data
-// return users_data
-// //console.log(followers[data][users]);
-
-// }
 
 async function getUsersByScore(score) {
   // get the score from the front

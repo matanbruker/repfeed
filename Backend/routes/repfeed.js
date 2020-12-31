@@ -4,11 +4,24 @@ var router = express.Router();
 const repfeedUtils = require("./utils/repfeedUtils");
 const DBUtils = require("./utils/DBUtils");
 
-router.get("/repFeed/:score", (req, res) => {
+// router.get('/repfeed', (req, res) => {
+//   console.log("/repfeed")
 
-    if (req.params != null) {
+// });
+
+// router.use((req,res,next) => {
+//   // console.log(req.params.score)
+//   console.log("/repfeed")
+//   next();
+// });
+
+router.get("/:score", (req, res) => {
+  console.log(req.params)
+  console.log(req.params.score)
+
+    if (req.params.score != null) {
       repfeedUtils
-        .buildRepFeedByBar(req.params)
+        .buildRepFeedByBar(req.params.score)
         .then((tweets_text) => res.send(tweets_text))
         .catch((error) => {
           console.log(error);

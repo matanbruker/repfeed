@@ -65,7 +65,7 @@ async function getUserTweetsIds(user_id){
 
 
 // exports.cheekUserIDinDB = cheekUserIDinDB;
-exports.getUsersByScore = getUsersByScore();
-exports.getUserFreinds = getUserFreinds();
-exports.getUserTweetsIds = getUserTweetsIds();
+exports.getUsersByScore = getUsersByScore;
+exports.getUserFreinds = getUserFreinds;
+exports.getUserTweetsIds = getUserTweetsIds;
 

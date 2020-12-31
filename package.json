@@ -1,22 +1,10 @@
 {
-  "name": "repfeed",
+  "name": "assignment-3-3",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
     "start": "node Backend/index.js",
     "serve": "vue-cli-service serve"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/matanbruker/repfeed.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/matanbruker/repfeed/issues"
-  },
-  "homepage": "https://github.com/matanbruker/repfeed#readme",
   "dependencies": {
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
@@ -28,6 +16,8 @@
     "mdbvue": "^6.7.1",
     "morgan": "^1.10.0",
     "mssql": "^6.3.0",
+    "core-js": "^3.6.5",
+    "mdbvue": "^6.7.1",
     "vue": "^2.6.11",
     "vue-axios": "^2.1.5",
     "vue-cookies": "^1.7.2",

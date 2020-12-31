@@ -1,23 +1,35 @@
 require("dotenv").config();
-// const sql = require("mssql");
+// const sql = require("mssql/msnodesqlv8");
 
-const sql = require("mssql/msnodesqlv8");
+// const config = {
+//     user: process.env.tedious_userName,
+//     password: process.env.tedious_password,
+//     server: process.env.tedious_server,
+//     database: process.env.tedious_database,
+//     driver: 'msnodesqlv8',    
+//     // connectionTimeout: 1500000,
+//     options: {
+//       //encrypt: true,
+//       //enableArithAbort: true,
+//       trustedConnection: true
+
+//     }
+//   };
+
+const sql = require("mssql");
 
 const config = {
-    user: process.env.tedious_userName,
-    password: process.env.tedious_password,
-    server: process.env.tedious_server,
-    database: process.env.tedious_database,
-    driver: 'msnodesqlv8',    
-    // connectionTimeout: 1500000,
-    options: {
-      //encrypt: true,
-      //enableArithAbort: true,
-      trustedConnection: true
+  user: process.env.tedious_userName,
+  password: process.env.tedious_password,
+  server: process.env.tedious_server,
+  database: process.env.tedious_database,
+  // connectionTimeout: 1500000,
+  options: {
+    encrypt: true,
+    enableArithAbort: true
+  }
+};
 
-    }
-  };
-  
 
 const pool = new sql.ConnectionPool(config);
 const poolConnect = pool

@@ -19,11 +19,26 @@ export default {
     return{
       value: 50,
     }
-  }
-
+  },
+  methods: {
+    async update_value(){ 
+    const response = await this.axios.get(
+          "http://localhost:3000/recipes/search/query/" +
+            this.search_query +
+            "/amount/" +
+            this.num +
+            "?" +
+            filters
+        );
+    },
+    
+  },
+  
 }
 </script>
 
 <style>
 
 </style>
+
+

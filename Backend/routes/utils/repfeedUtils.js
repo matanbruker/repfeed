@@ -23,9 +23,9 @@ async function getUsersFreinds(users_IDS) {
   let friends_IDs = [];
   let friends_of_user = [];
 
-  // for each user we take its followed users
-  users_IDS.forEach((user_id) => {
-    //get this user the users that he followed
+  // // for each user we take its followed users
+  users_IDS.array.forEach(user_id => {
+     //get this user the users that he followed
     // TODO: maybe take followers from twitter API
     friends_of_user = DBUtils.getUserFreinds(user_id);
 
@@ -35,6 +35,18 @@ async function getUsersFreinds(users_IDS) {
       }
     });
   });
+  // // for each user we take its followed users
+  // users_IDS.foreach((user_id) => {
+  //   //get this user the users that he followed
+  //   // TODO: maybe take followers from twitter API
+  //   friends_of_user = DBUtils.getUserFreinds(user_id);
+
+  //   friends_of_user.forEach((friend) => {
+  //     if (!friends_IDs.includes(friend)) {
+  //       friends_IDs.push(friend);
+  //     }
+  //   });
+  // });
 
   return friends_IDs;
 }
@@ -45,7 +57,7 @@ async function getUsersTweetsID(users_IDS) {
   let tweets_IDs = [];
   let tweets_IDs_for_specific_user = [];
 
-  users_IDS.forEach((user_id) => {
+  users_IDS.foreach((user_id) => {
     // List of Tweet_id
     tweets_IDs_for_specific_user = DBUtils.getUserTweetsIds(user_id);
     tweets_IDs.push(tweets_IDs_for_specific_user);
@@ -88,11 +100,11 @@ async function getTweetsFromTwitterAPI(show_tweets) {
   return tweets_text;
 }
 
-async function buildRepFeedByBar(param) {
+async function buildRepFeedByBar(score) {
 
-  let score = param.score
+  // let score = score
   tweets_IDs = [];
-
+  console.log(score);
   users_IDS = getUsersByScore(score);
   friends_IDS = getUsersFreinds(users_IDS);
   getUsersTweetsID(friends_IDS);
@@ -107,6 +119,6 @@ async function resetRepFeed() {
   tweets_IDs = [];
 }
 
-exports.buildRepFeedByBar = buildRepFeedByBar();
-exports.showTweets = showTweets();
-exports.resetRepFeed = resetRepFeed();
+exports.buildRepFeedByBar = buildRepFeedByBar;
+exports.showTweets = showTweets;
+exports.resetRepFeed = resetRepFeed;

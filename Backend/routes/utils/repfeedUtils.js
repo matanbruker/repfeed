@@ -90,7 +90,7 @@ async function getTweetsFromTwitterAPI(show_tweets) {
 
 async function buildRepFeedByBar(param) {
 
-  let score = param.score
+  let score = param
   tweets_IDs = [];
 
   users_IDS = getUsersByScore(score);

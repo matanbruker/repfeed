@@ -98,6 +98,10 @@ async function getUsersFriendsByFilters(age, country, party, gender, race) {
 }
 
 
+
+// =============== Exports ===============
 exports.cheekUserIDinDB = cheekUserIDinDB;
 exports.getUsersByScore = getUsersByScore;
+
+exports.getUsersFriendsByFilters = getUsersFriendsByFilters();
 

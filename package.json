@@ -1,22 +1,10 @@
 {
-  "name": "repfeed",
+  "name": "assignment-3-3",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
     "start": "node Backend/index.js",
     "serve": "vue-cli-service serve"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/matanbruker/repfeed.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/matanbruker/repfeed/issues"
-  },
-  "homepage": "https://github.com/matanbruker/repfeed#readme",
   "dependencies": {
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",

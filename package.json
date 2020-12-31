@@ -2,6 +2,7 @@
   "name": "assignment-3-3",
   "version": "1.0.0",
   "scripts": {
+    "start": "node Backend/index.js",
     "serve": "vue-cli-service serve"
   },
   "dependencies": {

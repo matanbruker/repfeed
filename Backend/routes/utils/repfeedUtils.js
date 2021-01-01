@@ -82,6 +82,7 @@ async function showTweets() {
 }
 
 async function getTweetsFromTwitterAPI(show_tweets) {
+  //show_tweets = ["786201477039607812","789244880946069505","790206055926099968","790231955925237761"]
   show_tweets = show_tweets.toString();
 
   // TODO: check if we need to sent a List to the API or one by one
@@ -96,6 +97,7 @@ async function getTweetsFromTwitterAPI(show_tweets) {
   tweets.data.forEach((tweet) => {
     tweets_text.push(tweet.text);
   });
+
 
   return tweets_text;
 }

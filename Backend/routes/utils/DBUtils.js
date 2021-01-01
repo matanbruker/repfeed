@@ -74,10 +74,15 @@ async function getUserTweetsIds(user_id){
   return db_answer;
 }
 
-
+// order tweet date from the newest to the oldest
+async function getAllAges(){
+  let db_answer = await execQuery("select distinct age from friendships");
+  return db_answer;
+}
 
 // exports.cheekUserIDinDB = cheekUserIDinDB;
 exports.getUsersByScore = getUsersByScore;
 exports.getUserFreinds = getUserFreinds;
 exports.getUserTweetsIds = getUserTweetsIds;
+exports.getAllAges = getAllAges;
 

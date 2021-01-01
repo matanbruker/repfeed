@@ -105,6 +105,7 @@
 import MainPage from './pages/MainPage.vue';
 import RepFeed from './pages/repFeed'
 import Population from './pages/population'
+
 export default {
   name: 'app',
   

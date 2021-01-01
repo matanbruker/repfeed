@@ -4,9 +4,9 @@
         <h1 class="text-xl font-bold">Repfeed</h1>
         <i class="fas fa-balance-scale text-xl text-blue"></i>
       </div>
-      <VueSlideBar v-model="value" /> 
+      <VueSlideBar v-model="value" @click="update_value()"/> 
       
-      <button type="submit" class="h-10 px-4 text-white font-semibold bg-blue hover:bg-darkblue focus:outline-none rounded-full relative right-0" style="position: relative; left: 80%; top: 15px;">
+      <button submit class="h-10 px-4 text-white font-semibold bg-blue hover:bg-darkblue focus:outline-none rounded-full relative right-0" @click="update_res()" style="position: relative; left: 80%; top: 15px;">
           Reset
       </button>
       <hr style="position: relative;top: 20px">
@@ -14,23 +14,68 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
+  
   data(){
     return{
       value: 50,
     }
   },
   methods: {
-    async update_value(){ 
-    const response = await this.axios.get(
-          "http://localhost:3000/recipes/search/query/" +
-            this.search_query +
-            "/amount/" +
-            this.num +
-            "?" +
-            filters
-        );
+          update_value(){ 
+          const response = axios.get("http://localhost:3000/repfeed"+"?value="+ this.value)
+          .then(response => console.log(response))
+          .catch() (error => {
+                this.errorMessage = error.message;
+                 console.error("There was an error!", error);
+          })
+          console.log(response);     
     },
+       update_res(){ 
+         const response = axios.get("http://localhost:3000/repfeed"+"?value=" + this.value)
+          .then(res => console.log(res))
+          .catch() (error => {
+                this.errorMessage = error.message;
+                 console.error("There was an error!", error);
+          })
+              
+    }
+
+
+
+
+    //  async reset(){ 
+    //       const response = await this.axios.get("http://localhost:3000/repfeed")
+    //       .then(response => console.log(response))
+    //       .catch() (error => {
+
+    //       }),
+          
+             
+    // },
+    //  async reset_b(){ 
+         
+    //       console.log("reset"); 
+    //       this.reset();
+    //       console.log("Worked");    
+    // },
+
+
+
+    //example from Doron
+    // async update_value(){ 
+    // const response = await this.axios.get(
+    //       "http://localhost:3000/recipes/search/query/" +
+    //         this.search_query +
+    //         "/amount/" +
+    //         this.num +
+    //         "?" +
+    //         filters
+    //     );
+    // },
+
+   
     
   },
   

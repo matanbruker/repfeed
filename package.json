@@ -31,7 +31,8 @@
     "msnodesqlv8": "^2.0.8",
     "mssql": "^6.3.0",
     "vue-async-function": "^3.1.2",
-    "vue-dynamic-dropdown": "^1.0.12"
+    "vue-dynamic-dropdown": "^1.0.12",
+    "vue-slide-bar": "^1.2.0"
   },
   "devDependencies": {},
   "description": ""

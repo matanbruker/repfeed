@@ -4,8 +4,11 @@
         <h1 class="text-xl font-bold">Repfeed</h1>
         <i class="fas fa-balance-scale text-xl text-blue"></i>
       </div>
-      <VueSlideBar v-model="value" @click="update_value()"/> 
-      
+      <VueSlideBar v-model="value"
+                  @callbackRange="callbackRange"
+                  @dragEnd="update_value"
+                  />
+                  
       <button submit class="h-10 px-4 text-white font-semibold bg-blue hover:bg-darkblue focus:outline-none rounded-full relative right-0" @click="update_res()" style="position: relative; left: 80%; top: 15px;">
           Reset
       </button>
@@ -19,28 +22,38 @@ export default {
   
   data(){
     return{
+     
       value: 50,
-    }
+
+    
+  }
   },
   methods: {
-          update_value(){ 
-          const response = axios.get("http://localhost:3000/repfeed"+"?value="+ this.value)
-          .then(response => console.log(response))
-          .catch() (error => {
-                this.errorMessage = error.message;
-                 console.error("There was an error!", error);
-          })
-          console.log(response);     
-    },
+          
        update_res(){ 
-         const response = axios.get("http://localhost:3000/repfeed"+"?value=" + this.value)
+         const res = axios.get("http://localhost:3000/repfeed"+"/reset")
           .then(res => console.log(res))
           .catch() (error => {
                 this.errorMessage = error.message;
                  console.error("There was an error!", error);
           })
               
-    }
+    },
+                update_value(){ 
+                const response = axios.get("http://localhost:3000/repfeed"+"?value="+ this.value)
+                .then(response => console.log(response))
+                .catch() (error => {
+                      this.errorMessage = error.message;
+                       console.error("There was an error!", error);
+          })
+              
+    },
+    callbackRange (val) {
+                console.log(val)
+                //this.sliderWithLabel.rangeValue = val;
+                value = val;
+                console.log(this.value)
+              }
 
 
 
@@ -77,7 +90,7 @@ export default {
 
    
     
-  },
+  }
   
 }
 </script>

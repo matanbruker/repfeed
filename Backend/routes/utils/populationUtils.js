@@ -87,11 +87,16 @@ async function buildPopulationFeedByFilters(param) {
 
 async function initFilters() {
 
-  let allAges =DBUtils.getAllAges
+  let filters_valuse = []
+  let allAges =DBUtils.getAllAges()
   // let allAges =DBUtils.getAllAges
   // let allAges =DBUtils.getAllAges
   // let allAges =DBUtils.getAllAges
   // let allAges =DBUtils.getAllAges
+
+  filters_valuse.push(allAges);
+
+  return filters_valuse
 
 }
 

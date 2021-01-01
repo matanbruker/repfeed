@@ -74,11 +74,7 @@ async function getUserTweetsIds(user_id){
   return db_answer;
 }
 
-// order tweet date from the newest to the oldest
-async function getAllAges(){
-  let db_answer = await execQuery("select distinct age from friendships");
-  return db_answer;
-}
+
 
 // TODO - check how to deal with empty filters, what the WHERE in SQL QUERY should get
 async function getUsersFriendsByFilters(age, country, party, gender, race) {
@@ -114,14 +110,18 @@ async function getUsersFriendsByFilters(age, country, party, gender, race) {
   return db_answer;
 }
 
+// select all the ages from the friendships table
+async function getAllAges(){
+  let db_answer = await execQuery("select distinct age from friendships");
+  return db_answer;
+}
 
 
 // =============== Exports ===============
-exports.cheekUserIDinDB = cheekUserIDinDB;
 exports.getUsersByScore = getUsersByScore;
 exports.getUserFreinds = getUserFreinds;
 exports.getUserTweetsIds = getUserTweetsIds;
 exports.getAllAges = getAllAges;
 
-exports.getUsersFriendsByFilters = getUsersFriendsByFilters();
+exports.getUsersFriendsByFilters = getUsersFriendsByFilters;
 

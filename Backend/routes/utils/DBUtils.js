@@ -116,13 +116,39 @@ async function getAllAges(){
   return db_answer;
 }
 
+// select all the countries from the friendships table
+async function getAllCountries(){
+  let db_answer = await execQuery("select distinct state_code from friendships");
+  return db_answer;
+}
 
+// select all the parties from the friendships table
+async function getAllParties(){
+  let db_answer = await execQuery("select distinct party from friendships");
+  return db_answer;
+}
+
+// select all the genders from the friendships table
+async function getAllGenders(){
+  let db_answer = await execQuery("select distinct sex from friendships");
+  return db_answer;
+}
+
+// select all the races from the friendships table
+async function getAllRaces(){
+  let db_answer = await execQuery("select distinct race_ethnicity from friendships");
+  return db_answer;
+}
 
 // =============== Exports ===============
 exports.getUsersByScore = getUsersByScore;
 exports.getUserFreinds = getUserFreinds;
 exports.getUserTweetsIds = getUserTweetsIds;
 exports.getAllAges = getAllAges;
+exports.getAllCountries = getAllCountries;
+exports.getAllParties = getAllParties;
+exports.getAllGenders = getAllGenders;
+exports.getAllRaces = getAllRaces;
 
 exports.getUsersFriendsByFilters = getUsersFriendsByFilters;
 

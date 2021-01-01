@@ -1,6 +1,4 @@
 require("dotenv").config();
-//const sql = require("mssql");
-
 const sql = require("mssql/msnodesqlv8");
 
 const config = {
@@ -17,7 +15,21 @@ const config = {
 
     }
   };
-  
+
+// const sql = require("mssql");
+
+// const config = {
+//   user: process.env.tedious_userName,
+//   password: process.env.tedious_password,
+//   server: process.env.tedious_server,
+//   database: process.env.tedious_database,
+//   // connectionTimeout: 1500000,
+//   options: {
+//     encrypt: true,
+//     enableArithAbort: true
+//   }
+// };
+
 
 const pool = new sql.ConnectionPool(config);
 const poolConnect = pool
@@ -47,7 +59,7 @@ execQuery().catch((error) => console.log(`Error in executing ${error}`));
 // }
 
 async function getUsersByScore(score){
-  let db_answer = await execQuery("select user_id from users where score = '"+score+"'");
+  let db_answer = await execQuery("select user_id from panel where score = '"+score+"'");
   return db_answer;
 }
 
@@ -62,6 +74,11 @@ async function getUserTweetsIds(user_id){
   return db_answer;
 }
 
+// order tweet date from the newest to the oldest
+async function getAllAges(){
+  let db_answer = await execQuery("select distinct age from friendships");
+  return db_answer;
+}
 
 // TODO - check how to deal with empty filters, what the WHERE in SQL QUERY should get
 async function getUsersFriendsByFilters(age, country, party, gender, race) {
@@ -71,19 +88,19 @@ async function getUsersFriendsByFilters(age, country, party, gender, race) {
   let sql_gender = "'" + gender + "'";
   let sql_race = "'" + race + "'";
 
-  if (age === "*"){
+  if (age === "age"){
     sql_age = "age";
   }
-  if (country === "*") {
+  if (country === "country") {
     sql_country = "state_code";
   }
-  if (party === "*") {
+  if (party === "party") {
     sql_party = "party";
   }
-  if (gender === "*") {
+  if (gender === "gender") {
     sql_gender = "sex";
   }
-  if (race === "*") {
+  if (race === "race") {
     sql_race = "race_ethnicity";
   }
 
@@ -102,6 +119,9 @@ async function getUsersFriendsByFilters(age, country, party, gender, race) {
 // =============== Exports ===============
 exports.cheekUserIDinDB = cheekUserIDinDB;
 exports.getUsersByScore = getUsersByScore;
+exports.getUserFreinds = getUserFreinds;
+exports.getUserTweetsIds = getUserTweetsIds;
+exports.getAllAges = getAllAges;
 
 exports.getUsersFriendsByFilters = getUsersFriendsByFilters();
 

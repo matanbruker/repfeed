@@ -85,8 +85,19 @@ async function buildPopulationFeedByFilters(param) {
   return tweets_text;
 }
 
+async function initFilters() {
+
+  let allAges =DBUtils.getAllAges
+  // let allAges =DBUtils.getAllAges
+  // let allAges =DBUtils.getAllAges
+  // let allAges =DBUtils.getAllAges
+  // let allAges =DBUtils.getAllAges
+
+}
+
 
 
 // =============== Exports ===============
-exports.buildPopulationFeedByFilters = buildPopulationFeedByFilters();
-exports.showTweets = showTweets();
+exports.buildPopulationFeedByFilters = buildPopulationFeedByFilters;
+exports.showTweets = showTweets;
+exports.initFilters = initFilters;

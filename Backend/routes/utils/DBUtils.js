@@ -116,7 +116,7 @@ async function getAllAges(){
   return db_answer;
 }
 
-//commit
+
 
 // =============== Exports ===============
 exports.getUsersByScore = getUsersByScore;

@@ -87,16 +87,18 @@ async function buildPopulationFeedByFilters(param) {
 
 async function initFilters() {
 
-
-  //age, country, party, gender, race
   let filters_valuse = []
   let allAges =DBUtils.getAllAges()
-  // let allAges =DBUtils.getAllAges
-  // let allAges =DBUtils.getAllAges
-  // let allAges =DBUtils.getAllAges
-  // let allAges =DBUtils.getAllAges
+  let allCountries = DBUtils.getAllCountries();
+  let allParties = DBUtils.getAllParties();
+  let allGenders = DBUtils.getAllGenders();
+  let allRaces = DBUtils.getAllRaces();
 
   filters_valuse.push(allAges);
+  filters_valuse.push(allCountries);
+  filters_valuse.push(allParties);
+  filters_valuse.push(allGenders);
+  filters_valuse.push(allRaces);
 
   return filters_valuse
 

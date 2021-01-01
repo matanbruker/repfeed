@@ -5,7 +5,7 @@ const populationUtils = require("./utils/populationUtils");
 const DBUtils = require("./utils/DBUtils");
 
 
-router.get("/population/:age/:country/:party/:gender/:race", (req, res) => {
+router.get("/:age/:country/:party/:gender/:race", (req, res) => {
      populationUtils
         .buildPopulationFeedByFilters(req.params)
         .then((tweets_text) => res.send(tweets_text))

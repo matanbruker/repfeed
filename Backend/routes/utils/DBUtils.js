@@ -71,19 +71,19 @@ async function getUsersFriendsByFilters(age, country, party, gender, race) {
   let sql_gender = "'" + gender + "'";
   let sql_race = "'" + race + "'";
 
-  if (age === "*"){
+  if (age === "age"){
     sql_age = "age";
   }
-  if (country === "*") {
+  if (country === "country") {
     sql_country = "state_code";
   }
-  if (party === "*") {
+  if (party === "party") {
     sql_party = "party";
   }
-  if (gender === "*") {
+  if (gender === "gender") {
     sql_gender = "sex";
   }
-  if (race === "*") {
+  if (race === "race") {
     sql_race = "race_ethnicity";
   }
 

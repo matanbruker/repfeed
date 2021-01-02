@@ -110,6 +110,12 @@ async function buildRepFeedByBar(score) {
 
 async function resetRepFeed() {
   tweets_IDs = [];
+
+  let users_IDS=[];
+  users_IDS = await DBUtils.getUsersByScore('pol_affl');
+  console.log(users_IDS)
+
+  return users_IDS;
 }
 
 exports.buildRepFeedByBar = buildRepFeedByBar;

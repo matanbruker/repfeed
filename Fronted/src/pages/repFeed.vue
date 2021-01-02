@@ -66,14 +66,17 @@ export default {
     };
   },
   methods: {
-    update_res() {
-      const res = axios.get("http://localhost:3000/repfeed/reset");
-      console.log(res);
-      //   .then((res) => console.log(res))
-      //   .catch()((error) => {
-      //   this.errorMessage = error.message;
-      //   console.error("There was an error!", error);
-      // });
+    async update_res() {
+      this.feed = ""
+      try {
+      const response = await axios.get("http://localhost:3000/repfeed/reset");
+      console.log(response);
+      this.feed = response.data;
+      this.slider.value=0
+      } catch (error) {
+        console.log(error);
+      }
+
     },
     async update_value() {
       this.feed = ""

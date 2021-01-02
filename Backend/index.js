@@ -24,7 +24,7 @@ const cors = require("cors");
 //const auth = require("./routes/auth");
 const repfeed = require("./routes/repfeed");
 const population = require("./routes/population");
-
+//
 
 //app settings
 const app = express();
@@ -67,6 +67,7 @@ app.use(express.static(path.join(__dirname, "public"))); //To serve static files
 //check if the server is alive
 app.get("/alive", (req, res) => {
     res.send("I'm alive");
+    console.log("I'm alive");
 });
 
 //#TODO : change to repFeed and Population

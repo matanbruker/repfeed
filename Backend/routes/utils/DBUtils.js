@@ -1,6 +1,4 @@
 require("dotenv").config();
-//const sql = require("mssql");
-
 const sql = require("mssql/msnodesqlv8");
 
 const config = {
@@ -17,7 +15,21 @@ const config = {
 
     }
   };
-  
+
+// const sql = require("mssql");
+
+// const config = {
+//   user: process.env.tedious_userName,
+//   password: process.env.tedious_password,
+//   server: process.env.tedious_server,
+//   database: process.env.tedious_database,
+//   // connectionTimeout: 1500000,
+//   options: {
+//     encrypt: true,
+//     enableArithAbort: true
+//   }
+// };
+
 
 const pool = new sql.ConnectionPool(config);
 const poolConnect = pool
@@ -47,7 +59,7 @@ execQuery().catch((error) => console.log(`Error in executing ${error}`));
 // }
 
 async function getUsersByScore(score){
-  let db_answer = await execQuery("select user_id from users where score = '"+score+"'");
+  let db_answer = await execQuery("select user_id from panel where score = '"+score+"'");
   return db_answer;
 }
 
@@ -61,6 +73,7 @@ async function getUserTweetsIds(user_id){
   let db_answer = await execQuery("select tweet_id from urls where user_id  = '"+user_id+"' ORDER BY tweet_date ASC");
   return db_answer;
 }
+
 
 
 // TODO - check how to deal with empty filters, what the WHERE in SQL QUERY should get
@@ -97,11 +110,45 @@ async function getUsersFriendsByFilters(age, country, party, gender, race) {
   return db_answer;
 }
 
+// select all the ages from the friendships table
+async function getAllAges(){
+  let db_answer = await execQuery("select distinct age from friendships");
+  return db_answer;
+}
 
+// select all the countries from the friendships table
+async function getAllCountries(){
+  let db_answer = await execQuery("select distinct state_code from friendships");
+  return db_answer;
+}
+
+// select all the parties from the friendships table
+async function getAllParties(){
+  let db_answer = await execQuery("select distinct party from friendships");
+  return db_answer;
+}
+
+// select all the genders from the friendships table
+async function getAllGenders(){
+  let db_answer = await execQuery("select distinct sex from friendships");
+  return db_answer;
+}
+
+// select all the races from the friendships table
+async function getAllRaces(){
+  let db_answer = await execQuery("select distinct race_ethnicity from friendships");
+  return db_answer;
+}
 
 // =============== Exports ===============
-exports.cheekUserIDinDB = cheekUserIDinDB;
 exports.getUsersByScore = getUsersByScore;
+exports.getUserFreinds = getUserFreinds;
+exports.getUserTweetsIds = getUserTweetsIds;
+exports.getAllAges = getAllAges;
+exports.getAllCountries = getAllCountries;
+exports.getAllParties = getAllParties;
+exports.getAllGenders = getAllGenders;
+exports.getAllRaces = getAllRaces;
 
-exports.getUsersFriendsByFilters = getUsersFriendsByFilters();
+exports.getUsersFriendsByFilters = getUsersFriendsByFilters;
 

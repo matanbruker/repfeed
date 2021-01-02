@@ -85,8 +85,28 @@ async function buildPopulationFeedByFilters(param) {
   return tweets_text;
 }
 
+async function initFilters() {
+
+  let filters_valuse = []
+  let allAges =DBUtils.getAllAges()
+  let allCountries = DBUtils.getAllCountries();
+  let allParties = DBUtils.getAllParties();
+  let allGenders = DBUtils.getAllGenders();
+  let allRaces = DBUtils.getAllRaces();
+
+  filters_valuse.push(allAges);
+  filters_valuse.push(allCountries);
+  filters_valuse.push(allParties);
+  filters_valuse.push(allGenders);
+  filters_valuse.push(allRaces);
+
+  return filters_valuse
+
+}
+
 
 
 // =============== Exports ===============
-exports.buildPopulationFeedByFilters = buildPopulationFeedByFilters();
-exports.showTweets = showTweets();
+exports.buildPopulationFeedByFilters = buildPopulationFeedByFilters;
+exports.showTweets = showTweets;
+exports.initFilters = initFilters;

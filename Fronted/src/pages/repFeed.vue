@@ -65,7 +65,8 @@ export default {
       // });
     },
     update_value() {
-      const response = axios.get("http://localhost:3000/repfeed/"+this.value)
+      console.log(this.slider.value)
+      const response = axios.get("http://localhost:3000/repfeed/"+this.slider.value)
       console.log(response)
       //   .then((response) => console.log(response))
       //   .catch()((error) => {
@@ -76,7 +77,7 @@ export default {
     callbackRange(val) {
       console.log(val);
       //this.sliderWithLabel.rangeValue = val;
-      this.value = val;
+      this.slider.value = val;
       // console.log(this.value);
     },
 

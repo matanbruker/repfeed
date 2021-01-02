@@ -24,7 +24,7 @@ async function getUsersFreinds(users_IDS) {
   let friends_of_user = [];
 
   // // for each user we take its followed users
-  users_IDS.array.forEach(user_id => {
+  users_IDS.forEach(user_id => {
      //get this user the users that he followed
     // TODO: maybe take followers from twitter API
     friends_of_user = DBUtils.getUserFreinds(user_id);
@@ -35,18 +35,7 @@ async function getUsersFreinds(users_IDS) {
       }
     });
   });
-  // // for each user we take its followed users
-  // users_IDS.foreach((user_id) => {
-  //   //get this user the users that he followed
-  //   // TODO: maybe take followers from twitter API
-  //   friends_of_user = DBUtils.getUserFreinds(user_id);
-
-  //   friends_of_user.forEach((friend) => {
-  //     if (!friends_IDs.includes(friend)) {
-  //       friends_IDs.push(friend);
-  //     }
-  //   });
-  // });
+  
 
   return friends_IDs;
 }
@@ -106,8 +95,8 @@ async function buildRepFeedByBar(score) {
   tweets_IDs = [];
   console.log(score);
   users_IDS = getUsersByScore(score);
-  friends_IDS = getUsersFreinds(users_IDS);
-  getUsersTweetsID(friends_IDS);
+  // friends_IDS = getUsersFreinds(users_IDS);
+  // getUsersTweetsID(friends_IDS);
 
   // Call function that show the newest tweets
   tweets_text = showTweets();

@@ -62,7 +62,10 @@ execQuery().catch((error) => console.log(`Error in executing ${error}`));
 // }
 
 async function getUsersByScore(score){
-  let db_answer = await execQuery("select user_id from panel where pol_affl = '"+score+"'");
+  console.log(score)
+  let db_answer =[]
+  db_answer = await execQuery(`select user_id from panel where pol_affl = 0`);
+  console.log(db_answer)
   return db_answer;
 }
 

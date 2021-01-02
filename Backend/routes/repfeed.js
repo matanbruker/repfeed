@@ -4,11 +4,24 @@ var router = express.Router();
 const repfeedUtils = require("./utils/repfeedUtils");
 const DBUtils = require("./utils/DBUtils");
 
-router.get("/repFeed", (req, res) => {
-  if (req.moreTweets == false) {
-    if (req.score != null) {
+// router.get('/repfeed', (req, res) => {
+//   console.log("/repfeed")
+
+// });
+
+// router.use((req,res,next) => {
+//   // console.log(req.params.score)
+//   console.log("/repfeed")
+//   next();
+// });
+
+router.get("/:score", (req, res) => {
+  console.log(req.params)
+  console.log(req.params.score)
+
+    if (req.params.score != null) {
       repfeedUtils
-        .buildRepFeedByBar(req.score)
+        .buildRepFeedByBar(req.params.score)
         .then((tweets_text) => res.send(tweets_text))
         .catch((error) => {
           console.log(error);
@@ -23,18 +36,17 @@ router.get("/repFeed", (req, res) => {
           res.sendStatus(404);
         });
     }
-  } else {
-    // if(req.score != null){
-    repfeedUtils
-      .showTweets()
-      .then((tweets_text) => res.send(tweets_text))
-      .catch((error) => {
-        console.log(error);
-        res.sendStatus(404);
-      });
+    // // if(req.score != null){
+    // repfeedUtils
+    //   .showTweets()
+    //   .then((tweets_text) => res.send(tweets_text))
+    //   .catch((error) => {
+    //     console.log(error);
+    //     res.sendStatus(404);
+    //   });
 
-    // }
-  }
+    // // }
+  
 });
 
 // router.get("/", (req, res) => {

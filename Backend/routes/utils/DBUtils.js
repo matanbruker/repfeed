@@ -47,7 +47,7 @@ execQuery().catch((error) => console.log(`Error in executing ${error}`));
 // }
 
 async function getUsersByScore(score){
-  let db_answer = await execQuery("select user_id from users where score = '"+score+"'");
+  let db_answer = await execQuery("select user_id from panel where pol_affl = '"+score+"'");
   return db_answer;
 }
 
@@ -64,6 +64,9 @@ async function getUserTweetsIds(user_id){
 
 
 
-//exports.cheekUserIDinDB = cheekUserIDinDB;
-exports.getUsersByScore = getUsersByScore();
+
+// exports.cheekUserIDinDB = cheekUserIDinDB;
+exports.getUsersByScore = getUsersByScore;
+exports.getUserFreinds = getUserFreinds;
+exports.getUserTweetsIds = getUserTweetsIds;
 

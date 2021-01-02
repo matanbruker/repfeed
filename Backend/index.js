@@ -16,16 +16,15 @@ const session = require("client-sessions");
 
 const path = require("path");
 const cors = require("cors");
-const { request } = require("http");
 
 
 //#TODO : change to repFeed and Population
 
 //routes importing
 //const auth = require("./routes/auth");
-//const repfeed = require("./routes/repfeed");
-//const population = require("./routes/population");
-
+const repfeed = require("./routes/repfeed");
+const population = require("./routes/population");
+//
 
 //app settings
 const app = express();
@@ -68,24 +67,14 @@ app.use(express.static(path.join(__dirname, "public"))); //To serve static files
 //check if the server is alive
 app.get("/alive", (req, res) => {
     res.send("I'm alive");
+    console.log("I'm alive");
 });
 
-// app.get("/repfeed", (req, res) => {
-//   res.send( req.body);
-// });
-app.get("/repfeed" , (req, res) => {
-  console.log(req.query.value)
-  res.send( req.body);
-  
-});
-app.post("/repfeed", (req, res) => {
-  res.send(req.body);
-});
 //#TODO : change to repFeed and Population
 
 //routing
-//app.use("/repfeed",repfeed);
-//app.use("/population",population);
+app.use("/repfeed",repfeed);
+app.use("/population",population);
 //app.use(auth);
 
 //default router

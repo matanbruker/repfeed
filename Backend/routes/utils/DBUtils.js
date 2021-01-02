@@ -1,34 +1,34 @@
 require("dotenv").config();
-// const sql = require("mssql/msnodesqlv8");
-
-// const config = {
-//     user: process.env.tedious_userName,
-//     password: process.env.tedious_password,
-//     server: process.env.tedious_server,
-//     database: process.env.tedious_database,
-//     driver: 'msnodesqlv8',    
-//     // connectionTimeout: 1500000,
-//     options: {
-//       //encrypt: true,
-//       //enableArithAbort: true,
-//       trustedConnection: true
-
-//     }
-//   };
-
-const sql = require("mssql");
+const sql = require("mssql/msnodesqlv8");
 
 const config = {
-  user: process.env.tedious_userName,
-  password: process.env.tedious_password,
-  server: process.env.tedious_server,
-  database: process.env.tedious_database,
-  // connectionTimeout: 1500000,
-  options: {
-    encrypt: true,
-    enableArithAbort: true
-  }
-};
+    user: process.env.tedious_userName,
+    password: process.env.tedious_password,
+    server: process.env.tedious_server,
+    database: process.env.tedious_database,
+    driver: 'msnodesqlv8',    
+    // connectionTimeout: 1500000,
+    options: {
+      //encrypt: true,
+      //enableArithAbort: true,
+      trustedConnection: true
+
+    }
+  };
+
+// const sql = require("mssql");
+
+// const config = {
+//   user: process.env.tedious_userName,
+//   password: process.env.tedious_password,
+//   server: process.env.tedious_server,
+//   database: process.env.tedious_database,
+//   // connectionTimeout: 1500000,
+//   options: {
+//     encrypt: true,
+//     enableArithAbort: true
+//   }
+// };
 
 
 const pool = new sql.ConnectionPool(config);
@@ -59,7 +59,7 @@ execQuery().catch((error) => console.log(`Error in executing ${error}`));
 // }
 
 async function getUsersByScore(score){
-  let db_answer = await execQuery("select user_id from users where score = '"+score+"'");
+  let db_answer = await execQuery("select user_id from panel where pol_affl = '"+score+"'");
   return db_answer;
 }
 

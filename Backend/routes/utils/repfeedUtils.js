@@ -14,7 +14,9 @@ async function getUsersByScore(score) {
   // let score = req.param
 
   // go to DB - get all the users with this score
-  let users_IDS = DBUtils.getUsersByScore(score);
+  let users_IDS=[];
+  users_IDS = await DBUtils.getUsersByScore(score);
+  console.log(users_IDS)
 
   return users_IDS;
 }
@@ -93,8 +95,9 @@ async function buildRepFeedByBar(score) {
 
   // let score = score
   tweets_IDs = [];
+  let users_IDS=[];
   console.log(score);
-  users_IDS = getUsersByScore(score);
+  users_IDS = await getUsersByScore(score);
   // friends_IDS = getUsersFreinds(users_IDS);
   // getUsersTweetsID(friends_IDS);
 

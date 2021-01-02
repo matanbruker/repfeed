@@ -1,5 +1,6 @@
 require("dotenv").config();
 const sql = require("mssql");
+// const sql = require("mysql");
 require("msnodesqlv8");
 
 // const sql = require("mssql/msnodesqlv8");
@@ -9,8 +10,9 @@ const config = {
     password: process.env.tedious_password,
     server: process.env.tedious_server,
     database: process.env.tedious_database,
+    // port: 1433,
     driver: 'msnodesqlv8',    
-    connectionTimeout: 1500000,
+    // connectionTimeout: 1500000,
     options: {
       encrypt: true,
       enableArithAbort: true,
@@ -62,10 +64,10 @@ execQuery().catch((error) => console.log(`Error in executing ${error}`));
 // }
 
 async function getUsersByScore(score){
-  console.log(score)
-  let db_answer =[]
-  db_answer = await execQuery(`select user_id from panel where pol_affl = 0`);
-  console.log(db_answer)
+  console.log(score);
+  let db_answer =[];
+  db_answer = await execQuery(`select user_id from panel where pol_affl = ${score}`);
+  console.log(db_answer);
   return db_answer;
 }
 
@@ -82,7 +84,14 @@ async function getUserTweetsIds(user_id){
 
 
 // exports.cheekUserIDinDB = cheekUserIDinDB;
-exports.getUsersByScore = getUsersByScore;
-exports.getUserFreinds = getUserFreinds;
-exports.getUserTweetsIds = getUserTweetsIds;
+// exports.getUsersByScore = getUsersByScore;
+// exports.getUserFreinds = getUserFreinds;
+// exports.getUserTweetsIds = getUserTweetsIds;
 
+module.exports ={
+  execQuery: execQuery,
+  getUsersByScore: getUsersByScore,
+  getUserFreinds: getUserFreinds,
+  getUserTweetsIds: getUserTweetsIds,
+  
+}

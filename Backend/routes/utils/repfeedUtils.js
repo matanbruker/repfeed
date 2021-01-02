@@ -8,7 +8,8 @@ const DBUtils = require("./DBUtils");
 
 let tweets_IDs = [];
 
-
+// get users by given political score
+// using DBUtils module
 async function getUsersByScore(score) {
   // get the score from the front
   // let score = req.param
@@ -19,11 +20,13 @@ async function getUsersByScore(score) {
   return users_IDS;
 }
 
+// get users friends using DBUtils module
+// arg: list of users ids that their friends should be fetched
 async function getUsersFreinds(users_IDS) {
   let friends_IDs = [];
   let friends_of_user = [];
 
-  // // for each user we take its followed users
+  // for each user we take its followed users
   users_IDS.array.forEach(user_id => {
      //get this user the users that he followed
     // TODO: maybe take followers from twitter API
@@ -50,9 +53,8 @@ async function getUsersFreinds(users_IDS) {
 
   return friends_IDs;
 }
-//
 
-
+//arg: users ids that their tweets ids should be fetched
 async function getUsersTweetsID(users_IDS) {
   let tweets_IDs = [];
   let tweets_IDs_for_specific_user = [];

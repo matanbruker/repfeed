@@ -42,4 +42,4 @@ router.get("/:age/:country/:party/:gender/:race", (req, res) => {
     //     });
     // }
     // );
-}
+//}

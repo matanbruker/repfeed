@@ -1,6 +1,7 @@
 require("dotenv").config();
 const sql = require("mssql/msnodesqlv8");
 
+// connection config
 const config = {
     user: process.env.tedious_userName,
     password: process.env.tedious_password,
@@ -16,27 +17,14 @@ const config = {
     }
   };
 
-// const sql = require("mssql");
-
-// const config = {
-//   user: process.env.tedious_userName,
-//   password: process.env.tedious_password,
-//   server: process.env.tedious_server,
-//   database: process.env.tedious_database,
-//   // connectionTimeout: 1500000,
-//   options: {
-//     encrypt: true,
-//     enableArithAbort: true
-//   }
-// };
-
-
+// connecting to sql server
 const pool = new sql.ConnectionPool(config);
 const poolConnect = pool
   .connect()
   .then(() => console.log("new connection pool Created"))
   .catch((err) => console.log(err));
 
+// execute given sql query
 async function execQuery(query) {
   await poolConnect;
   try {
@@ -48,6 +36,7 @@ async function execQuery(query) {
   }
 };
 
+// what does it do?
 execQuery().catch((error) => console.log(`Error in executing ${error}`));
 
 
@@ -58,16 +47,20 @@ execQuery().catch((error) => console.log(`Error in executing ${error}`));
 //     return db_answer;
 // }
 
+// getting all users with given political score from panel table
 async function getUsersByScore(score){
   let db_answer = await execQuery("select user_id from panel where score = '"+score+"'");
   return db_answer;
 }
 
+// get all users freinds from friends table
+// user identified by his user_id
 async function getUserFreinds(user_id){
   let db_answer = await execQuery("select friend_uid from friendships where panel_uid  = '"+user_id+"'");
   return db_answer;
 }
 
+// get all user's tweet_id from urls table
 // order tweet date from the newest to the oldest
 async function getUserTweetsIds(user_id){
   let db_answer = await execQuery("select tweet_id from urls where user_id  = '"+user_id+"' ORDER BY tweet_date ASC");
@@ -77,6 +70,7 @@ async function getUserTweetsIds(user_id){
 
 
 // TODO - check how to deal with empty filters, what the WHERE in SQL QUERY should get
+// maybe the func should return empty json?
 async function getUsersFriendsByFilters(age, country, party, gender, race) {
   let sql_age = "'" + age + "'";
   let sql_country = "'" + country + "'";
@@ -149,6 +143,5 @@ exports.getAllCountries = getAllCountries;
 exports.getAllParties = getAllParties;
 exports.getAllGenders = getAllGenders;
 exports.getAllRaces = getAllRaces;
-
 exports.getUsersFriendsByFilters = getUsersFriendsByFilters;
 

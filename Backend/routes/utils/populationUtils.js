@@ -8,7 +8,7 @@ const DBUtils = require("./DBUtils");
 
 let tweets_IDs = [];
 
-
+// getting the user's friends through the DBUtils module
 async function getUsersFriendsByFilters(age, country, party, gender, race) {
   // get the filters from the front
 
@@ -18,6 +18,8 @@ async function getUsersFriendsByFilters(age, country, party, gender, race) {
   return friends_IDS;
 }
 
+// get users tweets ids through DBUtils module
+// arg: list of users ids that their tweets ids should be fetched
 async function getUsersTweetsID(users_IDS) {
   let tweets_IDs = [];
   let tweets_IDs_for_specific_user = [];
@@ -47,6 +49,8 @@ async function showTweets() {
   getTweetsFromTwitterAPI(show_tweets);
 }
 
+// this function fetch tweets from twitter api
+//arg: list of tweets ids
 async function getTweetsFromTwitterAPI(show_tweets) {
   show_tweets = show_tweets.toString();
 
@@ -66,7 +70,7 @@ async function getTweetsFromTwitterAPI(show_tweets) {
   return tweets_text;
 }
 
-
+//arg: list of filters values
 async function buildPopulationFeedByFilters(param) {
   let age = param.age;
   let country = param.country;

@@ -31,6 +31,7 @@
     "morgan": "^1.10.0",
     "msnodesqlv8": "^2.0.9",
     "mssql": "^6.3.1",
+    "mysql": "^2.18.1",
     "vue-async-function": "^3.1.2",
     "vue-dynamic-dropdown": "^1.0.12",
     "vue-slide-bar": "^1.2.0"

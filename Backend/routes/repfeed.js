@@ -4,16 +4,6 @@ var router = express.Router();
 const repfeedUtils = require("./utils/repfeedUtils");
 const DBUtils = require("./utils/DBUtils");
 
-// router.get('/repfeed', (req, res) => {
-//   console.log("/repfeed")
-
-// });
-
-// router.use((req,res,next) => {
-//   // console.log(req.params.score)
-//   console.log("/repfeed")
-//   next();
-// });
 
 router.get("/:score", (req, res) => {
   console.log(req.params)

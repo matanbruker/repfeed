@@ -6,7 +6,12 @@
       <h1 class="text-xl font-bold">Repfeed</h1>
       <i class="fas fa-balance-scale text-xl text-blue"></i>
     </div>
-    <VueSlideBar v-model="slider.value" :data="slider.data"  @dragEnd="update_value" @callbackRange="callbackRange" />
+    <VueSlideBar
+      v-model="slider.value"
+      :data="slider.data"
+      @dragEnd="update_value"
+      @callbackRange="callbackRange"
+    />
 
     <button
       submit
@@ -17,7 +22,13 @@
       Reset
     </button>
     <hr style="position: relative; top: 20px" />
+
+    <!-- feed tweet -->
+    <div>
+      <p>{{this.feed}}</p>
+    </div>
   </div>
+  
 </template>
 
 <script>
@@ -25,6 +36,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      feed: "",
       slider: {
         value: 0,
         data: [
@@ -48,31 +60,32 @@ export default {
           0.7,
           0.8,
           0.9,
-          1
+          1,
         ],
-      }
+      },
     };
   },
   methods: {
     update_res() {
-      const res = axios
-        .get("http://localhost:3000/repfeed/reset")
-        console.log(res)
+      const res = axios.get("http://localhost:3000/repfeed/reset");
+      console.log(res);
       //   .then((res) => console.log(res))
       //   .catch()((error) => {
       //   this.errorMessage = error.message;
       //   console.error("There was an error!", error);
       // });
     },
-    update_value() {
-      console.log(this.slider.value)
-      const response = axios.get("http://localhost:3000/repfeed/"+this.slider.value)
-      console.log(response)
-      //   .then((response) => console.log(response))
-      //   .catch()((error) => {
-      //   this.errorMessage = error.message;
-      //   console.error("There was an error!", error);
-      // });
+    async update_value() {
+      this.feed = ""
+
+      try {
+        console.log(this.slider.value);
+        const response = await axios.get("http://localhost:3000/repfeed/" + this.slider.value);
+        console.log(response.data);
+        this.feed = response.data;
+      } catch (error) {
+        console.log(error);
+      }
     },
     callbackRange(val) {
       console.log(val);

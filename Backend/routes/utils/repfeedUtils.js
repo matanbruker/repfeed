@@ -98,13 +98,14 @@ async function buildRepFeedByBar(score) {
   let users_IDS=[];
   console.log(score);
   users_IDS = await getUsersByScore(score);
+  return users_IDS
   // friends_IDS = getUsersFreinds(users_IDS);
   // getUsersTweetsID(friends_IDS);
 
   // Call function that show the newest tweets
-  tweets_text = showTweets();
+  // tweets_text = showTweets();
 
-  return tweets_text;
+  // return tweets_text;
 }
 
 async function resetRepFeed() {

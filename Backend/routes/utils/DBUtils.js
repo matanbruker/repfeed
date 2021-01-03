@@ -119,7 +119,8 @@ async function getUsersFriendsByFilters(age, country, party, gender, race) {
       " and sex  = " +
       sql_gender +
       " and race_ethnicity  = " +
-      sql_race
+      sql_race + 
+      "and has_tweets = 1"
   );
   return db_answer;
 }

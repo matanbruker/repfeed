@@ -8,12 +8,17 @@ const DBUtils = require("./DBUtils");
 
 let tweets_IDs = [];
 
-
 async function getUsersFriendsByFilters(age, country, party, gender, race) {
   // get the filters from the front
 
   // go to DB - get all the friends of the users with this filters
-  let friends_IDS = DBUtils.getUsersFriendsByFilters(age, country, party, gender, race);
+  let friends_IDS = await DBUtils.getUsersFriendsByFilters(
+    age,
+    country,
+    party,
+    gender,
+    race
+  );
 
   return friends_IDS;
 }
@@ -28,7 +33,6 @@ async function getUsersTweetsID(users_IDS) {
     tweets_IDs.push(tweets_IDs_for_specific_user);
   });
 }
-
 
 async function showTweets() {
   let num_of_tweets = 7;
@@ -66,7 +70,6 @@ async function getTweetsFromTwitterAPI(show_tweets) {
   return tweets_text;
 }
 
-
 async function buildPopulationFeedByFilters(param) {
   let age = param.age;
   let country = param.country;
@@ -76,7 +79,13 @@ async function buildPopulationFeedByFilters(param) {
 
   tweets_IDs = [];
 
-  friends_IDS = getUsersFriendsByFilters(age, country, party, gender, race);
+  friends_IDS = await getUsersFriendsByFilters(
+    age,
+    country,
+    party,
+    gender,
+    race
+  );
   getUsersTweetsID(friends_IDS);
 
   // Call function that show the newest tweets
@@ -86,13 +95,12 @@ async function buildPopulationFeedByFilters(param) {
 }
 
 async function initFilters() {
-
-  let filters_valuse = []
-  let allAges =DBUtils.getAllAges()
-  let allCountries = DBUtils.getAllCountries();
-  let allParties = DBUtils.getAllParties();
-  let allGenders = DBUtils.getAllGenders();
-  let allRaces = DBUtils.getAllRaces();
+  let filters_valuse = [];
+  let allAges = await DBUtils.getAllAges();
+  let allCountries = await DBUtils.getAllCountries();
+  let allParties = await DBUtils.getAllParties();
+  let allGenders = await DBUtils.getAllGenders();
+  let allRaces = await DBUtils.getAllRaces();
 
   filters_valuse.push(allAges);
   filters_valuse.push(allCountries);
@@ -100,11 +108,8 @@ async function initFilters() {
   filters_valuse.push(allGenders);
   filters_valuse.push(allRaces);
 
-  return filters_valuse
-
+  return filters_valuse;
 }
-
-
 
 // =============== Exports ===============
 exports.buildPopulationFeedByFilters = buildPopulationFeedByFilters;

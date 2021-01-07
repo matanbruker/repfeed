@@ -1,5 +1,5 @@
 export default[
      {value: "gender", text: "Gender"},
-     {value: "Male", text: "Male"},
-     {value: "Female", text: "Female"}
+     {value: "Female", text: "Female"},
+     {value: "Male", text: "Male"}
     ]

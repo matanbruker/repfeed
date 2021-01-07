@@ -8,9 +8,6 @@ import VueSlideBar from 'vue-slide-bar'
 import { FormSelectPlugin } from 'bootstrap-vue'
 Vue.use(FormSelectPlugin)
 
-// import { SpinnerPlugin } from 'bootstrap-vue'
-// Vue.use(SpinnerPlugin)
-
 import { BFormSelect } from 'bootstrap-vue'
 Vue.component('b-form-select', BFormSelect)
 

@@ -2,10 +2,13 @@
   <div id="app" class="flex container h-screen w-full">
     <!-- nav bar   -->
     <SlidNav />
+
     <!-- middle -->
     <Wall />
+
     <!-- trending -->
     <Trending />
+
   </div>
 </template>
 
@@ -22,7 +25,6 @@ export default {
     Trending,
     Wall,
   },
-  
 };
 </script>
 <style>

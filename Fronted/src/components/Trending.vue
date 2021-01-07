@@ -1,6 +1,6 @@
 <template>
       <div
-      class="md:block hidden w-1/3 h-full border-l border-lighter py-2 px-6 overflow-y-scroll relative"
+      class="md:block hidden w-1/3 h-full border-l border-lighter py-2 px-6"
     >
       <input
         class="pl-12 rounded-full w-full p-2 bg-lighter text-sm mb-4"

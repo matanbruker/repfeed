@@ -1,4 +1,5 @@
 const axios = require("axios");
+const { columns } = require("mssql");
 
 //change to the right api and api key
 const users_api_url = "https://api.twitter.com/2";
@@ -6,86 +7,53 @@ const token = process.env.twitter_apiKey;
 
 const DBUtils = require("./DBUtils");
 
-let tweets_IDs = [];
-
 
 async function getUsersByScore(score) {
   // get the score from the front
-  // let score = req.param
-
   // go to DB - get all the users with this score
-  let users_IDS = DBUtils.getUsersByScore(score);
+  let users_IDS = [];
+  users_IDS = await DBUtils.getUsersByScore(score);
 
   return users_IDS;
 }
 
-async function getUsersFreinds(users_IDS) {
-  let friends_IDs = [];
-  let friends_of_user = [];
 
-  // // for each user we take its followed users
-  users_IDS.array.forEach(user_id => {
-     //get this user the users that he followed
-    // TODO: maybe take followers from twitter API
-    friends_of_user = DBUtils.getUserFreinds(user_id);
+async function getUsersFreindsTweetsIDs(users_IDS) {
 
-    friends_of_user.forEach((friend) => {
-      if (!friends_IDs.includes(friend)) {
-        friends_IDs.push(friend);
-      }
-    });
-  });
-  // // for each user we take its followed users
-  // users_IDS.foreach((user_id) => {
-  //   //get this user the users that he followed
-  //   // TODO: maybe take followers from twitter API
-  //   friends_of_user = DBUtils.getUserFreinds(user_id);
-
-  //   friends_of_user.forEach((friend) => {
-  //     if (!friends_IDs.includes(friend)) {
-  //       friends_IDs.push(friend);
-  //     }
-  //   });
-  // });
-
-  return friends_IDs;
-}
-//
-
-
-async function getUsersTweetsID(users_IDS) {
   let tweets_IDs = [];
-  let tweets_IDs_for_specific_user = [];
+  let tweets_IDs_for_specific_friend = [];
+  if (users_IDS != null) {
 
-  users_IDS.foreach((user_id) => {
-    // List of Tweet_id
-    tweets_IDs_for_specific_user = DBUtils.getUserTweetsIds(user_id);
-    tweets_IDs.push(tweets_IDs_for_specific_user);
-  });
-}
+    for (let user of users_IDS) {
+        tweets_IDs_for_specific_friend = await DBUtils.getUserTweetsIds(user.user_id);
 
-async function showTweets() {
-  let num_of_tweets = 7;
-  let i;
-  let show_tweets = [];
+        if (tweets_IDs_for_specific_friend.length != 0) {
+          for (let tweet of tweets_IDs_for_specific_friend) {
 
-  for (i = 0; i < num_of_tweets; i++) {
-    if (tweets_IDs != null) {
-      if (tweets_IDs[0] != null) {
-        show_tweets.push(tweets_IDs[0]);
-        tweets_IDs.shift();
-      }
+            tweets_IDs.push(tweet.tweet_id);
+          }
+        }
     }
+
   }
 
-  getTweetsFromTwitterAPI(show_tweets);
+  return tweets_IDs;
 }
 
-async function getTweetsFromTwitterAPI(show_tweets) {
-  //show_tweets = ["786201477039607812","789244880946069505","790206055926099968","790231955925237761"]
-  show_tweets = show_tweets.toString();
 
-  // TODO: check if we need to sent a List to the API or one by one
+async function getTweetsFromTwitterAPI(tweets_IDS) {
+  let show_tweets = []
+  let tweet_list = []
+  for (let tweets of tweets_IDS) {
+    tweet_list = tweets.split(/[ ]+/);
+    show_tweets.push.apply(show_tweets, tweet_list)
+
+  }
+
+  show_tweets = getRandomElements(show_tweets, 99);
+
+  show_tweets = show_tweets.toString().replace("'", "");
+  console.log(show_tweets)
   let tweets = await axios.get(`${users_api_url}/tweets?ids=${show_tweets}`, {
     headers: {
       Authorization: "Bearer " + token, //the token is a variable which holds the token
@@ -94,33 +62,81 @@ async function getTweetsFromTwitterAPI(show_tweets) {
 
   let tweets_text = [];
 
-  tweets.data.forEach((tweet) => {
-    tweets_text.push(tweet.text);
-  });
-
+  if(tweets.data.data.length !=0 ){
+    for (let tweet of tweets.data.data) {
+      tweets_text.push(tweet.text);
+    }
+  }
 
   return tweets_text;
 }
 
+function getRandomElements(array, n) {
+  // Shuffle array
+  console.log(array)
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+  // Pick a remaining element...
+  randomIndex = Math.floor(Math.random() * currentIndex);
+  currentIndex -= 1;
+
+  // And swap it with the current element.
+  temporaryValue = array[currentIndex];
+  array[currentIndex] = array[randomIndex];
+  array[randomIndex] = temporaryValue;
+}
+  
+// Get sub-array of first n elements after shuffled
+let selected = array.slice(0, n);
+
+  console.log(selected)
+  return selected
+}
+
+
 async function buildRepFeedByBar(score) {
 
-  // let score = score
-  tweets_IDs = [];
-  console.log(score);
-  users_IDS = getUsersByScore(score);
-  friends_IDS = getUsersFreinds(users_IDS);
-  getUsersTweetsID(friends_IDS);
+  let users_IDS = [];
+  let tweets_IDS = [];
+  let tweets_text = [];
+  users_IDS = await getUsersByScore(score);
 
-  // Call function that show the newest tweets
-  tweets_text = showTweets();
+  if (users_IDS.length != 0) {
+    tweets_IDS = await getUsersFreindsTweetsIDs(users_IDS)
+
+    if (tweets_IDS.length != 0) {
+      tweets_text = await getTweetsFromTwitterAPI(tweets_IDS)
+
+    }
+  }
+
 
   return tweets_text;
 }
 
 async function resetRepFeed() {
-  tweets_IDs = [];
+
+  let users_IDS = [];
+  let tweets_IDS = [];
+  let tweets_text = [];
+  users_IDS = await getUsersByScore('pol_affl');
+
+  if (users_IDS.length != 0) {
+    tweets_IDS = await getUsersFreindsTweetsIDs(users_IDS)
+
+    if (tweets_IDS.length != 0) {
+      tweets_text = await getTweetsFromTwitterAPI(tweets_IDS)
+
+    }
+  }
+
+  return tweets_text;
+
+
 }
 
 exports.buildRepFeedByBar = buildRepFeedByBar;
-exports.showTweets = showTweets;
 exports.resetRepFeed = resetRepFeed;

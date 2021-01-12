@@ -19,4 +19,6 @@ npm install @vue/cli-service
 ## Creators
 
 Aviran Goel, Doron Shamai, Itay Merhav, Matan Bruker
-Under the guidance of Dr. Nir Grinberg
+
+
+**Under the guidance of Dr. Nir Grinberg**

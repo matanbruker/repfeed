@@ -57,9 +57,9 @@ async function getTweetsFromTwitterAPI(tweets_IDS) {
 
     // get random tweets from the list to sent the front
     show_tweets = getRandomElements(show_tweets, 99);
-
     show_tweets = show_tweets.toString().replace("'", "");
-    console.log(show_tweets)
+
+    // send requst to the Twitter API with String of all the tweets IDs 
     let tweets = await axios.get(`${users_api_url}/tweets?ids=${show_tweets}`, {
         headers: {
             Authorization: "Bearer " + token, //the token is a variable which holds the token

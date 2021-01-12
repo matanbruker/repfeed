@@ -14,13 +14,15 @@ Vue.component('b-form-select', BFormSelect)
 Vue.component('VueSlideBar', VueSlideBar)
 Vue.config.productionTip = true;
 
+// use VueRouter for routing in the App
 Vue.use(VueRouter);
 
+// set the routing in the routes.js file
 const router = new VueRouter({
   routes,
 });
 
-
+// set the render of the App to the app id
 new Vue({
   router,
   render: h => h(App),

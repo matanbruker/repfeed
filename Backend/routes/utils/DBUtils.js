@@ -54,6 +54,7 @@ execQuery().catch((error) => console.log(`Error in executing ${error}`));
 
 // =============== Queries ===============
 
+// get all the users IDs that have this score
 async function getUsersByScore(score) {
   console.log(score);
   let db_answer = [];
@@ -62,11 +63,14 @@ async function getUsersByScore(score) {
   return db_answer;
 }
 
+// get all the friends IDs of this user
 async function getUserFreinds(user_id) {
   let db_answer = await execQuery(`select top 5 friend_uid from friendships where panel_uid  ='${user_id}' and has_tweets = 1 order by newid()`);
   return db_answer;
 }
 
+
+// get all the tweets IDs of this user
 // order tweet date from the newest to the oldest
 async function getUserTweetsIds(user_id) {
   let db_answer = await execQuery(`SELECT top 10 friend_tweetList.tweet_id 
@@ -78,7 +82,8 @@ async function getUserTweetsIds(user_id) {
   return db_answer;
 }
 
-
+// get all the friends with this filters
+// and than get all the tweets IDs of those friends
 async function getUsersFriendsByFilters(age, country, party, gender, race) {
   let sql_age = "'" + age + "'";
   let sql_country = "'" + country + "'";

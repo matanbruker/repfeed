@@ -1,14 +1,18 @@
 <template>
       <div
-      class="md:block hidden w-1/3 h-full border-l border-lighter py-2 px-6"
-    >
+      class="md:block hidden w-1/3 h-full border-l border-lighter py-2 px-6">
+<!-- search option -->
       <input
         class="pl-12 rounded-full w-full p-2 bg-lighter text-sm mb-4"
         placeholder="Search Twitter"
       />
+      
+<!-- logo for search -->
       <i
         class="fas fa-search absolute left-0 top-0 mt-5 ml-12 text-sm text-light"
       ></i>
+
+<!-- the options of pages we recommend for the user -->
       <div class="w-full rounded-lg bg-lightest">
         <div class="flex items-center justify-between p-3">
           <p class="text-lg font-bold">Trends for You</p>
@@ -40,7 +44,6 @@ data() {
         { icon: "far fa-user", title: "Profile", id: "profile" },
         { icon: "fas fa-balance-scale", title: "RepFeed", id: "repfeed" },
         { icon: "fas fa-globe-europe", title: "Population", id: "population" },
-        //{icon: 'fas fa-ellipsis-h', title: 'More', id: 'more'}
       ],
       id: "home",
       dropdown: false,
@@ -57,12 +60,10 @@ data() {
     };
   },
   methods: {
-    addNewTweet() {
-      let newTweet = {
-        content: this.tweet.content,
-      };
-      this.tweets.push(newTweet);
-    },
+        /**
+     * switch the current page, using routing.
+     * the middle part of the page is switching
+     */
     switch_page(tab_id) {
       if (tab_id === "repfeed") {
         this.$router.push("/repFeed").catch(() => {

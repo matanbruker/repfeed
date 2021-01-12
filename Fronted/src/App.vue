@@ -1,12 +1,12 @@
 <template>
   <div id="app" class="flex container h-screen w-full">
-    <!-- nav bar   -->
+<!-- nav bar   -->
     <SlidNav />
 
-    <!-- middle -->
+<!-- middle -->
     <Wall />
 
-    <!-- trending -->
+<!-- trending -->
     <Trending />
 
   </div>

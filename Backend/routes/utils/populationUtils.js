@@ -1,11 +1,21 @@
 const axios = require("axios");
 
-//change to the right api and api key
+//the Twitter api and api key
 const users_api_url = "https://api.twitter.com/2";
 const token = process.env.twitter_apiKey;
 
 const DBUtils = require("./DBUtils");
 
+
+/**
+ *  get all the friends IDs that have this filters
+  get all the tweets IDs of those friends.
+ * @param {*} age : age of the friends
+ * @param {*} country : country of the friends
+ * @param {*} party : party of the friends
+ * @param {*} gender of the friends
+ * @param {*} race of the friends
+ */
 async function getUsersFriendsByFilters(age, country, party, gender, race) {
     // get the filters from the front
     let tweets_IDs = []
@@ -17,6 +27,8 @@ async function getUsersFriendsByFilters(age, country, party, gender, race) {
         gender,
         race
     );
+
+    // if there is tweets for the friends that have those filters, get the tweets IDs 
     if (tweets_IDs_for_specific_friend.length != 0) {
         for (let tweet of tweets_IDs_for_specific_friend) {
 
@@ -26,21 +38,14 @@ async function getUsersFriendsByFilters(age, country, party, gender, race) {
     return tweets_IDs;
 }
 
-// async function getUsersTweetsID(friends_IDs) {
-//     let tweets_IDs = [];
-//     let tweets_IDs_for_specific_friend = [];
 
-//     if (friends_IDs != null) {
-//         for (let friend of friends_IDs) {
-//             tweets_IDs_for_specific_friend = await DBUtils.getUserTweetsIds(friend);
-//             tweets_IDs.push(tweets_IDs_for_specific_friend);
-
-//         }
-//     }
-
-//     return tweets_IDs;
-// }
-
+/**
+ * sent to the Twitter Api the list of all tweets IDs, 
+    and get a list of all the tweets that exist in twitter,
+    for every tweet we get the tweet_id and tweet_text.
+    return list of tweets_text
+ * @param {*} tweets_IDS : list of tweets IDs
+ */
 async function getTweetsFromTwitterAPI(tweets_IDS) {
     let show_tweets = []
     let tweet_list = []
@@ -50,6 +55,7 @@ async function getTweetsFromTwitterAPI(tweets_IDS) {
 
     }
 
+    // get random tweets from the list to sent the front
     show_tweets = getRandomElements(show_tweets, 99);
 
     show_tweets = show_tweets.toString().replace("'", "");
@@ -62,6 +68,7 @@ async function getTweetsFromTwitterAPI(tweets_IDS) {
 
     let tweets_text = [];
 
+    //  for every tweet get only the tweet text.
     for (let tweet of tweets.data.data) {
         tweets_text.push(tweet.text);
     }
@@ -69,6 +76,12 @@ async function getTweetsFromTwitterAPI(tweets_IDS) {
     return tweets_text;
 }
 
+
+/**
+ * get a random elemnts from the array
+ * @param {*} array : array to choose elemnts from
+ * @param {*} n : num of elemnts to return 
+ */
 function getRandomElements(array, n) {
     // Shuffle array
     console.log(array)
@@ -94,6 +107,12 @@ function getRandomElements(array, n) {
     return selected
 }
 
+/**
+ * set the data from the Get request(URL) to the varibels.
+ * call the functions to get the data by this varibels.
+ * return list of tweets text.
+ * @param {*} param : the data from the get request (URL) 
+ */
 async function buildPopulationFeedByFilters(param) {
     let age = param.age;
     let country = param.country;

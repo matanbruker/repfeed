@@ -8,14 +8,15 @@
         background-color: white;
       "
     >
-      <!-- title -->
+<!-- Population title -->
       <div
         class="px-5 py-3 border-b border-lighter flex items-center justify-between"
       >
         <h1 class="text-xl font-bold">Population</h1>
         <i class="fas fa-globe-europe text-xl text-blue"></i>
       </div>
-      <!-- selections -->
+<!-- Filters for Population's Segmentation. 
+     The filters are: age, country, party, gender and race -->
       <div style="margin-bottom: 1px">Please Choose Your Filters:</div>
       <div>
         <b-form-select
@@ -76,7 +77,7 @@
           :options="op_race"
         ></b-form-select>
       </div>
-
+<!-- Buttons for search and reset  -->
       <div>
         <button
           type="submit"
@@ -99,7 +100,7 @@
       </div>
     </div>
 
-    <!-- feed tweet -->
+<!-- Feed tweets: show the tweets that returns from the backend -->
     <div v-if="this.error_message.length != 0">
       <p class="px-5 py-6 border-b border-lighter" style="margin-top: 15px">
         {{ this.error_message }}
@@ -155,6 +156,9 @@ export default {
     };
   },
   methods: {
+    /**
+     * clear the feed and filters
+     */
     set_reset() {
       this.load = false;
       try {
@@ -169,21 +173,21 @@ export default {
         console.log(error);
       }
     },
+    /**
+     * send Get request to the backend with the parameters from the filters.
+     * get the response from the backend and set the data to the feed varible 
+     */
     async search() {
       this.load = true;
-      // console.log(options_ages);
       this.feed = "";
       this.error_message = "";
-      console.log(this.age);
-      console.log(this.country);
-      console.log(this.party);
-      console.log(this.gender);
-      console.log(this.race);
+      // send Get request 
       try {
         const response = await axios.get(
           `http://localhost:3000/population/${this.age}/${this.country}/${this.party}/${this.gender}/${this.race}`
         );
-        console.log(response.data);
+
+        // if the backend returns empty list, set an error message
         if (response.data.length != 0) {
           this.feed = response.data;
         } else {
@@ -199,8 +203,4 @@ export default {
 </script>
 
 <style>
-/* .select{
-  vertical-align: -webkit-baseline-middle;
-  -ms-grid-column-align:center
-} */
 </style>

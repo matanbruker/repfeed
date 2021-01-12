@@ -3,11 +3,13 @@
       class="lg:w-1/5 border-r border-lighter px-2 lg:px-6 py-2 flex flex-col justify-between"
     >
       <div>
+<!-- Logo of twitter -->
         <button
           class="h-12 w-12 hover:bg-lightblue text-3xl rounded-full text-blue"
         >
           <i class="fab fa-twitter"></i>
         </button>
+<!-- Options in navbar -->
         <div>
           <button
             v-for="tab in tabs"
@@ -23,12 +25,14 @@
             </p>
           </button>
         </div>
+<!-- Tweet button -->
         <button
           class="text-white bg-blue rounded-full font-semibold focus:outline-none w-12 h-12 lg:h-auto lg:w-full p-3 hover:bg-darkblue"
         >
           <p class="hidden lg:block">Tweet</p>
           <i class="fas fa-plus lg:hidden"></i>
         </button>
+
       </div>
     </div>
 </template>
@@ -49,7 +53,6 @@ export default {
         { icon: "far fa-user", title: "Profile", id: "profile" },
         { icon: "fas fa-balance-scale", title: "RepFeed", id: "repfeed" },
         { icon: "fas fa-globe-europe", title: "Population", id: "population" },
-        //{icon: 'fas fa-ellipsis-h', title: 'More', id: 'more'}
       ],
       id: "home",
       dropdown: false,
@@ -66,12 +69,10 @@ export default {
     };
   },
   methods: {
-    addNewTweet() {
-      let newTweet = {
-        content: this.tweet.content,
-      };
-      this.tweets.push(newTweet);
-    },
+    /**
+     * switch the current page, using routing.
+     * the middle part of the page is switching
+     */
     switch_page(tab_id) {
       if (tab_id === "repfeed") {
         this.$router.push("/repFeed").catch(() => {

@@ -1,14 +1,15 @@
 <template>
   <div class="md:w-full h-full" >
     <div  style="position: -webkit-sticky;position: sticky;top:0;background-color:white;">
-      <!-- title -->
+<!--RepFeed title -->
       <div
         class="px-5 py-3 border-b border-lighter flex items-center justify-between"
       >
         <h1 class="text-xl font-bold">RepFeed</h1>
         <i class="fas fa-balance-scale text-xl text-blue"></i>
       </div>
-      <!-- slide bar -->
+
+<!-- slide bar -->
       <div class="px-1">
         <VueSlideBar
           v-model="slider.value"
@@ -17,7 +18,8 @@
           @callbackRange="callbackRange"
         />
       </div>
-      <!-- reset button -->
+
+<!-- reset button -->
       <div
         class="px-5 py-6 border-b border-lighter flex items-center justify-between"
       >
@@ -31,7 +33,7 @@
         </button>
       </div>
     </div>
-    <!-- feed tweet -->
+<!-- Feed tweets: show the tweets that returns from the backend -->
     <div v-if="this.error_message.length != 0">
       <p class="px-5 py-6 border-b border-lighter" style="margin-top: 15px">
         {{ this.error_message }}
@@ -98,6 +100,11 @@ export default {
     };
   },
   methods: {
+    /**
+     * reset the slide bar value to zero
+     * send Get request to the backend to search for all the scores options.
+     * get the response from the backend and set the data to the feed varible
+     */
     async update_res() {
       this.load = true;
       this.feed = "";
@@ -105,7 +112,6 @@ export default {
       try {
         this.slider.value = 0;
         const response = await axios.get("http://localhost:3000/repfeed/reset");
-        //console.log(response);
         if (response.data.length != 0) {
           this.feed = response.data;
         } else {
@@ -116,16 +122,21 @@ export default {
         console.log(error);
       }
     },
+    /**
+     * send Get request to the backend with the score from the slide bar.
+     * get the response from the backend and set the data to the feed varible 
+     */
     async update_value() {
       this.load = true;
       try {
         this.feed = "";
         this.error_message = "";
-        console.log(this.slider.value);
+
+        // send Get request 
         const response = await axios.get(
           "http://localhost:3000/repfeed/" + this.slider.value
         );
-        //console.log(response.data);
+        // if the backend returns empty list, set an error message
         if (response.data.length != 0) {
           this.feed = response.data;
         } else {
@@ -136,6 +147,9 @@ export default {
         console.log(error);
       }
     },
+    /**
+     * update the slider value after user drag
+     */
     callbackRange(val) {
       console.log(val);
       this.slider.value = val;

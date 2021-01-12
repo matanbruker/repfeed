@@ -1,6 +1,8 @@
 # RepFeed
 
-RepFeed is a project of Node.js and Vue.js which presents an interface that allows the user to control the political tweets to which he wants to be exposed and allows the user to see tweets of a particular population segment by selecting filters.
+RepFeed is a project of Node.js and Vue.js which presents an interface that allows the user to control the political tweets to which he wants to be exposed and allows the user to see tweets of a particular population segment by selecting filters.<br>
+
+The information displayed in the project is retrieved using SQL queries and verified by the Twitter API.
 
 ## Installation
 ```bash

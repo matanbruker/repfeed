@@ -17,11 +17,7 @@ const session = require("client-sessions");
 const path = require("path");
 const cors = require("cors");
 
-
-//#TODO : change to repFeed and Population
-
 //routes importing
-//const auth = require("./routes/auth");
 const repfeed = require("./routes/repfeed");
 const population = require("./routes/population");
 //
@@ -70,21 +66,16 @@ app.get("/alive", (req, res) => {
     console.log("I'm alive");
 });
 
-//#TODO : change to repFeed and Population
 
 //routing
 app.use("/repfeed",repfeed);
 app.use("/population",population);
-//app.use(auth);
 
 //default router
 app.use((req, res) => {
     res.sendStatus(404);
 });
 
-// app.listen(port, () => {
-//     console.log(`Example app listening on port ${port}!`);
-// });
 
 app.use(function (err, req, res, next) {
     console.error(err);

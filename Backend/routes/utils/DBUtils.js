@@ -2,18 +2,13 @@ require("dotenv").config();
 const sql = require("mssql");
 require("msnodesqlv8");
 
-// const sql = require("mssql/msnodesqlv8");
-// // require("msnodesqlv8");
 
 const config = {
   user: process.env.tedious_userName,
   password: process.env.tedious_password,
   server: process.env.tedious_server,
   database: process.env.tedious_database,
-  // driver: 'msnodesqlv8',
-  //connectionTimeout: 1500000,
   options: {
-    //encrypt: true,
     enableArithAbort: true,
     trustedConnection: true
 
@@ -54,50 +49,52 @@ execQuery().catch((error) => console.log(`Error in executing ${error}`));
 
 // =============== Queries ===============
 
-// get all the users IDs that have this score
 async function getUsersByScore(score) {
   console.log(score);
   let db_answer = [];
-  db_answer = await execQuery(`select top 5 user_id from panel where pol_affl = ${score}  order by newid()`);
+  // db_answer = await execQuery(`select top 5 user_id from panel_index_test where pol_affl = ${score} order by newid()`);
+  db_answer = await execQuery(`select top 5 user_id from panel where pol_affl = ${score} order by newid()`);
   console.log(db_answer);
   return db_answer;
 }
 
-// get all the friends IDs of this user
 async function getUserFreinds(user_id) {
-  let db_answer = await execQuery(`select top 5 friend_uid from friendships where panel_uid  ='${user_id}' and has_tweets = 1 order by newid()`);
+  let db_answer = await execQuery(`select top 5 friend_uid from friendships_index_test where panel_uid  ='${user_id}' and has_tweets = 1 order by newid()`);
+  // let db_answer = await execQuery(`select top 5 friend_uid from friendships where panel_uid  ='${user_id}' and has_tweets = 1 order by newid()`);
   return db_answer;
 }
 
-
-// get all the tweets IDs of this user
 // order tweet date from the newest to the oldest
-async function getUserTweetsIds(user_id) {
+async function getFriendsTweetsIds(user_id) {
   let db_answer = await execQuery(`SELECT top 10 friend_tweetList.tweet_id 
   FROM friend_tweetList
-  INNER JOIN friendships 
-  ON friend_tweetList.user_id=friendships.friend_uid
-  Where friendships.panel_uid  ='${user_id}'
+  INNER JOIN friendships_index_test 
+  ON friend_tweetList.user_id=friendships_index_test.friend_uid
+  Where friendships_index_test.panel_uid  ='${user_id}'
   order by newid()`);
+  
+
+  // let db_answer = await execQuery(`SELECT top 10 friend_tweetList.tweet_id 
+  // FROM friend_tweetList
+  // INNER JOIN friendships 
+  // ON friend_tweetList.user_id=friendships.friend_uid
+  // Where friendships.panel_uid  ='${user_id}'
+  // order by newid()`);
+  
   return db_answer;
 }
 
-// get all the friends with this filters
-// and than get all the tweets IDs of those friends
-async function getUsersFriendsByFilters(age, country, party, gender, race) {
-  let sql_age = "'" + age + "'";
+
+async function getTweetsByFilters(age_bucket, country, party, gender, race) {
+  let sql_age_bucket = "'" + age_bucket + "'";
   let sql_country = "'" + country + "'";
   let sql_party = "'" + party + "'";
   let sql_gender = "'" + gender + "'";
   let sql_race = "'" + race + "'";
-  // let sql_age = age
-  // let sql_country = country
-  // let sql_party = party
-  // let sql_gender = gender
-  // let sql_race = race
 
-  if (age === "age") {
-    sql_age = "age";
+
+  if (age_bucket === "age_bucket") {
+    sql_age_bucket = "age_bucket";
   }
   if (country === "country") {
     sql_country = "state_code";
@@ -111,49 +108,27 @@ async function getUsersFriendsByFilters(age, country, party, gender, race) {
   if (race === "race") {
     sql_race = "race_ethnicity";
   }
-  let db_answer = await execQuery("SELECT top 20 friend_tweetList.tweet_id FROM friend_tweetList INNER JOIN (select distinct friend_uid from friendships where age  = " +
-    sql_age +
+  let db_answer = await execQuery("SELECT top 25 friend_tweetList.tweet_id FROM friend_tweetList INNER JOIN (select distinct friend_uid from friendships_index_test where age_bucket  = " +
+  sql_age_bucket +
     " and state_code  = " + sql_country +
     " and party  = " + sql_party +
     " and sex  = " + sql_gender +
     " and race_ethnicity  = " + sql_race +
-    " and has_tweets = 1) as r ON friend_tweetList.user_id= r.friend_uid"
+    " and has_tweets = 1) as r ON friend_tweetList.user_id = r.friend_uid order by newid()"
   );
-  return db_answer;
-}
 
+  // Query (insted of upper query) for the updated static tweets - do not run while the python running!
 
-// select all the ages from the friendships table
-async function getAllAges() {
-  let db_answer = await execQuery("select distinct age from friendships order by age ASC");
-  return db_answer;
-}
+  // let db_answer = await execQuery("SELECT top 25 friend_staticTweetList.tweet_id FROM friend_staticTweetList INNER JOIN (select distinct friend_uid from friendships_index_test where age_bucket  = " + 
+  // sql_age_bucket + 
+  // " and state_code = " + sql_country + 
+  // " and party  = " + sql_party + 
+  // " and sex = " + sql_gender +
+  // " and race_ethnicity = " + sql_race + 
+  // " and has_tweets = 1 ) as r ON friend_staticTweetList.user_id= r.friend_uid WHERE friend_staticTweetList.fixed = 1 " + 
+  // " and friend_staticTweetList.tweet_id != 'none' order by newid()"
+  // );
 
-// select all the countries from the friendships table
-async function getAllCountries() {
-  let db_answer = await execQuery(
-    "select distinct state_code from friendships"
-  );
-  return db_answer;
-}
-
-// select all the parties from the friendships table
-async function getAllParties() {
-  let db_answer = await execQuery("select distinct party from friendships");
-  return db_answer;
-}
-
-// select all the genders from the friendships table
-async function getAllGenders() {
-  let db_answer = await execQuery("select distinct sex from friendships");
-  return db_answer;
-}
-
-// select all the races from the friendships table
-async function getAllRaces() {
-  let db_answer = await execQuery(
-    "select distinct race_ethnicity from friendships"
-  );
   return db_answer;
 }
 
@@ -162,11 +137,6 @@ module.exports = {
   execQuery: execQuery,
   getUsersByScore: getUsersByScore,
   getUserFreinds: getUserFreinds,
-  getUserTweetsIds: getUserTweetsIds,
-  getUsersFriendsByFilters: getUsersFriendsByFilters,
-  getAllAges: getAllAges,
-  getAllCountries: getAllCountries,
-  getAllParties: getAllParties,
-  getAllGenders: getAllGenders,
-  getAllRaces: getAllRaces,
+  getFriendsTweetsIds: getFriendsTweetsIds,
+  getTweetsByFilters: getTweetsByFilters,
 };

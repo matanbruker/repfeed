@@ -1,0 +1,31 @@
+{
+    "name": "test",
+    "description": "this is a test",
+    "version": "0.0.1",
+    "manifest_version" : 2,
+    "icons": {
+        "48": "./icon_48.png",
+        "128": "./icon_128.png"
+    },
+    "content_scripts": [
+        {
+          "matches": ["https://twitter.com/*"],
+          "css": ["./bootstrap.min.css", "./inter.css", "./all.css", "./tab.css"]
+        }
+      ],
+    "background": {
+        "scripts": [
+            "./background.js",
+            "./jquery.js"
+        ]
+    },
+    "permissions": [
+        "tabs",
+        "https://www.twitter.com/*",
+        "https://twitter.com/twitter"
+    ],
+    "content_security_policy": "script-src 'self' https://platform.twitter.com https://cdn.syndication.twimg.com 'unsafe-eval'; object-src 'self'; font-src 'self' https://use.fontawesome.com/releases/v5.6.3/css/all.css; frame-src 'self' https://twitter.com https://mobile.twitter.com https://pay.twitter.com https://cards-frame.twitter.com" 
+    
+}
+
+

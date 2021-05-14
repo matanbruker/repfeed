@@ -13,6 +13,7 @@ RepFeed system provides political tweets from several points of view that exist 
 For download please click on the following link:** [RepFeed Feature](https://chrome.google.com/webstore/detail/repfeed/mmicoheejekjeagfokgpdplnhfaibkej?hl=en-US)
 <br>
 For adding the extension to the browser, click the on the blue button that says: Add to Chrome.
+<br>
 
 ## Start Work With RepFeed!
 After the installation, please make sure that the extension is active. If not, you may click on the extension's icon for make it active. 
@@ -21,7 +22,6 @@ Now, you may visit twitter website. You may click on the following link:  [Twitt
 
 ## What Can You Do With The RepFeed Feature?
 You could notice that on the left side of the page, in the navigation bar, 2 new tabs where added:
-<br>
 <br>
 ### RepFeed
 After clicking the RepFeed button, it will direct to a new page.
@@ -65,6 +65,7 @@ The front side contains 2 systems:
 -	Beta system which was used in the user's experiment. This system is separated from Twitter and open a new tab in the browser. We used Vue.js.
 -	Chrome extension which combines the system with twitter website. It adds the tabs above the navigation bar in twitter. 
 
+<br>
 
 ## Installation
 ```bash

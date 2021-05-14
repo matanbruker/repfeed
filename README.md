@@ -14,6 +14,7 @@ RepFeed system provides political tweets from several points of view that exist 
 <br>
 For download please click on the following link:** [RepFeed Feature](https://chrome.google.com/webstore/detail/repfeed/mmicoheejekjeagfokgpdplnhfaibkej?hl=en-US)
 <br>
+<br>
 For adding the extension to the browser, click the on the blue button that says: Add to Chrome.
 <br>
 <br>

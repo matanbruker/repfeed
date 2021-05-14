@@ -4,10 +4,11 @@ RepFeed is a project of Node.js and Vue.js which presents an interface that allo
 
 The information displayed in the project is retrieved using SQL queries and verified by the Twitter API.
 
-# Downlaod Feature
+## Downlaod Feature
 
-RepFeed system provides political tweets from several points of view that exist in the society. The system is already available for download in the Google Chrome Web Store. 
-For download please click on the following link:<br>
+RepFeed system provides political tweets from several points of view that exist in the society.
+<br>**The system is already available for download in the Google Chrome Web Store. 
+<br>For download please click on the following link:**<br>
 [RepFeed Feature](https://chrome.google.com/webstore/detail/repfeed/mmicoheejekjeagfokgpdplnhfaibkej?hl=en-US)
 
 

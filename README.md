@@ -22,6 +22,7 @@ Now, you may visit twitter website. You may click on the following link:  [Twitt
 ## What Can You Do With The RepFeed Feature?
 You could notice that on the left side of the page, in the navigation bar, 2 new tabs where added:
 <br>
+<br>
 **–	RepFeed –** 
 <br>
 After clicking the RepFeed button, it will direct to a new page.
@@ -32,13 +33,20 @@ You may move the bar's pointer between these values and the system will present 
 <br>
 <br>
 **–	Population –**
-After clicking the population button, it will direct to new page. The page contains 5 different filters. You may choose any combination of the filters below:
+<br>
+After clicking the population button, it will direct to new page. The page contains 5 different filters.
+<br>
+You may choose any combination of the filters below:
+<br>
 -	Age – present options of age ranges. 
 -	State – present options of the states in the US.
 -	Gender – present options of the 2 genders.
 -	Party – present options of the parties that exist in USA.
 -	Race – present option of the existing races in the US.
-For example, if you use the "Party" filter and choose "Democrat", the system will show you tweets by the point of view of Democrats.  
+<br>
+<br>
+For example, if you use the "Party" filter and choose "Democrat", the system will show you tweets by the point of view of Democrats.
+<br>
 You may choose multiple number of filters.
 
 

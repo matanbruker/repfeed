@@ -4,15 +4,11 @@ var router = express.Router();
 const repfeedUtils = require("./utils/repfeedUtils");
 const DBUtils = require("./utils/DBUtils");
 
-//temp
-router.get("/temp", (req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello RepFeed');
-  
-});
-
-
+/**
+ * for Get request with the word reset
+ * call "resetRepFeed" function.
+ * send the result back to the front
+ */
 router.get("/reset", (req, res) => {
       repfeedUtils
         .resetRepFeed()
@@ -23,6 +19,11 @@ router.get("/reset", (req, res) => {
         });
 });
 
+/**
+ * for Get request with this parameter 
+ * call "buildRepFeedByBar" function and send the param.
+ * send the result back to the front
+ */
 router.get("/:score", (req, res) => {
       repfeedUtils
         .buildRepFeedByBar(req.params.score)

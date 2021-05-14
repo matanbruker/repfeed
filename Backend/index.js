@@ -60,8 +60,8 @@ app.use(
       })
 );
 
-app.use(express.static(path.join(__dirname, "public"))); //To serve static files such as images, CSS files, and JavaScript files
-
+//To serve static files such as images, CSS files, and JavaScript files
+app.use(express.static(path.join(__dirname, "public"))); 
 
 //check if the server is alive
 app.get("/alive", (req, res) => {
@@ -80,6 +80,7 @@ app.use((req, res) => {
     res.sendStatus(404);
 });
 
+// Show server status when connect and disconnect
 app.use(function (err, req, res, next) {
     console.error(err);
     res.status(err.status || 500).send({ message: err.message, success: false });

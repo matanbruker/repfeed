@@ -4,9 +4,12 @@ var router = express.Router();
 const populationUtils = require("./utils/populationUtils");
 const DBUtils = require("./utils/DBUtils");
 
-
+/**
+ * for Get request with this parameters
+ * call "buildPopulationFeedByFilters" function and send the params.
+ * send the result back to the front
+ */
 router.get("/:age/:country/:party/:gender/:race", (req, res) => {
-    console.log(req.params)
   populationUtils
     .buildPopulationFeedByFilters(req.params)
     .then((tweets_id) => res.send(tweets_id))

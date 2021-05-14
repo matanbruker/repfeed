@@ -24,7 +24,6 @@ You could notice that on the left side of the page, in the navigation bar, 2 new
 <br>
 <br>
 ### RepFeed
-<br>
 After clicking the RepFeed button, it will direct to a new page.
 <br>
 The page contains a bar with values raging from -1 to 1. The values represent political classification values from Democrat up to Republican.
@@ -33,7 +32,6 @@ You may move the bar's pointer between these values and the system will present 
 <br>
 <br>
 ### Population
-<br>
 After clicking the population button, it will direct to new page. The page contains 5 different filters.
 <br>
 You may choose any combination of the filters below:

@@ -6,11 +6,11 @@ The information displayed in the project is retrieved using SQL queries and veri
 
 ## Downlaod Feature
 
-RepFeed system provides political tweets from several points of view that exist in the society.<br>
+RepFeed system provides political tweets from several points of view that exist in the society.
 <br>
-<br>**The system is already available for download in the Google Chrome Web Store. 
-<br>For download please click on the following link:**<br>
-[RepFeed Feature](https://chrome.google.com/webstore/detail/repfeed/mmicoheejekjeagfokgpdplnhfaibkej?hl=en-US)
+**The system is already available for download in the Google Chrome Web Store. 
+<br>
+For download please click on the following link:** [RepFeed Feature](https://chrome.google.com/webstore/detail/repfeed/mmicoheejekjeagfokgpdplnhfaibkej?hl=en-US)
 
 
 <br>

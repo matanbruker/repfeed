@@ -17,7 +17,7 @@ For adding the extension to the browser, click the on the blue button that says:
 ## Start Work With RepFeed!
 After the installation, please make sure that the extension is active. If not, you may click on the extension's icon for make it active. 
 <br>
-Now, you may visit twitter website. You may click on the following link:[Twitter](https://twitter.com/home)
+Now, you may visit twitter website. You may click on the following link:  [Twitter](https://twitter.com/home)
 
 
 

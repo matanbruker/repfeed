@@ -73,20 +73,6 @@ The front side contains 2 systems:
 
 <br>
 
-## Installation
-```bash
-npm install axios
-npm install body-parser
-npm install client-sessions
-npm install cors
-npm install dotenv
-npm install express
-npm install morgan
-npm install mssql
-npm install msnodesqlv8
-npm install @vue/cli-service
-```
-
 ## Creators
 
 Aviran Goel, Doron Shamai, Itay Merhav, Matan Bruker

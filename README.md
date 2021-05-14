@@ -50,6 +50,24 @@ You may choose multiple number of filters.
 
 
 
+## System Structure  
+### Server side
+The server functions as an external API that could receive HTTP requests,
+<br>
+and by the request's kind it will direct to the relevant JS code, operate the relevant functions and get the required data from the Data Base.
+<br>
+In addition, the server side contains Python code that run consistently and by using Twitter API, it receives updated political tweets of the panel members in the Data Base.
+<br>
+The Data Base was built Using Microsoft SQL server.
+
+
+### Front side
+The front side contains 2 systems:
+<br>
+-	Beta system which was used in the user's experiment. This system is separated from Twitter and open a new tab in the browser. We used Vue.js.
+-	Chrome extension which combines the system with twitter website. It adds the tabs above the navigation bar in twitter. 
+
+
 ## Installation
 ```bash
 npm install axios

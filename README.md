@@ -19,6 +19,28 @@ After the installation, please make sure that the extension is active. If not, y
 <br>
 Now, you may visit twitter website. You may click on the following link:  [Twitter](https://twitter.com/home)
 
+## What Can You Do With The RepFeed Feature?
+You could notice that on the left side of the page, in the navigation bar, 2 new tabs where added:
+<br>
+**–	RepFeed –** 
+<br>
+After clicking the RepFeed button, it will direct to a new page.
+<br>
+The page contains a bar with values raging from -1 to 1. The values represent political classification values from Democrat up to Republican.
+<br>
+You may move the bar's pointer between these values and the system will present tweets of the chosen value. 
+<br>
+<br>
+**–	Population –**
+After clicking the population button, it will direct to new page. The page contains 5 different filters. You may choose any combination of the filters below:
+-	Age – present options of age ranges. 
+-	State – present options of the states in the US.
+-	Gender – present options of the 2 genders.
+-	Party – present options of the parties that exist in USA.
+-	Race – present option of the existing races in the US.
+For example, if you use the "Party" filter and choose "Democrat", the system will show you tweets by the point of view of Democrats.  
+You may choose multiple number of filters.
+
 
 
 ## Installation

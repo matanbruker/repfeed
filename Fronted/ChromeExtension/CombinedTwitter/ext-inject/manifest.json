@@ -1,11 +1,11 @@
 {
-    "name": "test",
-    "description": "this is a test",
+    "name": "RepFeed",
+    "description": "This extension will give you the ability to see political tweets according to your prefercnces. The user required to choose values from the relevant filters and click on search button. The extention will present to the user relevant tweets according to the filter values the user chose. This extension is part of university project and its purpses are for research.",
     "version": "0.0.1",
     "manifest_version" : 2,
     "icons": {
-        "48": "./icon_48.png",
-        "128": "./icon_128.png"
+        "48": "./logo.PNG",
+        "128": "./logo.PNG"
     },
     "content_scripts": [
         {
@@ -19,12 +19,20 @@
             "./jquery.js"
         ]
     },
+    "web_accessible_resources": [
+        "population.html",
+        "repfeed.html",
+        "icons/globe.svg",
+        "icons/libra.svg",
+        "icons/globe_blue.svg",
+        "icons/libra_blue.svg"
+    ],
     "permissions": [
         "tabs",
         "https://www.twitter.com/*",
         "https://twitter.com/twitter"
     ],
-    "content_security_policy": "script-src 'self' https://platform.twitter.com https://cdn.syndication.twimg.com 'unsafe-eval'; object-src 'self'; font-src 'self' https://use.fontawesome.com/releases/v5.6.3/css/all.css; frame-src 'self' https://twitter.com https://mobile.twitter.com https://pay.twitter.com https://cards-frame.twitter.com" 
+    "content_security_policy": "script-src 'self' https://platform.twitter.com https://cdn.syndication.twimg.com 'unsafe-eval'; font-src 'self' https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css https://*.twimg.com https://use.fontawesome.com/releases/v5.6.3/css/all.css;  frame-src 'self' https://twitter.com https://mobile.twitter.com https://pay.twitter.com https://cards-frame.twitter.com https://platform.twitter.com; object-src 'self'" 
     
 }
 

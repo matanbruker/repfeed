@@ -1,154 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-    </head>
-    <body>
-        <div id="page" class="md:w-full h-full">
-            <div
-              style="
-                position: -webkit-sticky;
-                position: sticky;
-                top: 0;
-                background-color: white;
-              "
-            >
-              <!-- Population title -->
-              <div
-                class="px-5 py-3 border-b border-lighter flex items-center justify-between"
-              >
-                <h1 class="text-xl font-bold">Population</h1>
-                <!-- <i class="fas fa-globe-europe text-xl text-blue"></i> -->
-              </div>
-              <!-- Filters for Population's Segmentation.	
-                   The filters are: age, country, party, gender and race -->
-              <div style="margin-bottom: 1px">Please Choose Your Filters:</div>
-              <div>
-                <select
-                  id="age"
-                  class="mb-2"
-                  style="
-                    border: 2px solid #ced4da;
-                    width: 31%;
-                    margin-top: 1px;
-                    margin-bottom: 1px;
-                    margin-right: 10px;
-                  "
-                 
-                ></select>
-                <select
-                  id="country"
-                  class="mb-2"
-                  style="
-                    border: 2px solid #ced4da;
-                    width: 31%;
-                    margin-top: 1px;
-                    margin-bottom: 1px;
-                    margin-right: 10px;
-                  "
-                  
-                ></select>
-                <select
-                  id="gender"
-                  class="mb-2"
-                  style="
-                    border: 2px solid #ced4da;
-                    width: 31%;
-                    margin-top: 1px;
-                    margin-right: 10px;
-                  "
-                 
-                ></select>
-                <select
-                  id="party"
-                  class="mb-2"
-                  style="
-                    border: 2px solid #ced4da;
-                    width: 31%;
-                    margin-top: 1px;
-                    margin-right: 10px;
-                  "
-                 
-                ></select>
-                <select
-                  id="race"
-                  class="mb-2"
-                  style="
-                    border: 2px solid #ced4da;
-                    width: 31%;
-                    margin-top: 1px;
-                    margin-right: 10px;
-                  "
-                  
-                ></select>
-              </div>
-        <!-- Buttons for search and reset  -->
-              <div>
-                <button
-                  type="submit"
-                  class="h-10 px-4 text-white font-semibold bg-blue hover:bg-darkblue focus:outline-none rounded-full relative right-0"
-                  id="search"
-                  style="position: relative; left: 62%"
-                >
-                  Search
-                </button>
-        
-                <button
-                  type="submit"
-                  class="h-10 px-4 text-white font-semibold bg-blue hover:bg-darkblue focus:outline-none rounded-full relative right-0"
-                  id="reset"
-                  style="position: relative; left: 65%"
-                >
-                  Reset
-                </button>
-                <div class="px-5 py-1 border-b border-lighter"></div>
-              </div>
-            </div>
-        
-            <!-- Feed tweets: show the tweets that returns from the backend -->
-            <!-- <div id="error_message">
-              <p id="error_message_txt" class="px-5 py-6 border-b border-lighter" style="margin-top: 15px">                
-              </p>
-            </div> -->
-        
-            <!-- <div id="spinner">
-              <div class="text-center" style="margin-top: 50px">
-                <div
-                  class="spinner-border text-primary"
-                  style="width: 80px; height: 80px"
-                  role="status"
-                ></div>
-              </div>
-            </div> -->
-            <!-- <div v-else>
-              <p
-                class="px-5 py-6 border-b border-lighter"
-                style="margin-top: 15px"
-                v-for="tweet in this.feed"
-                :key="tweet"
-              >
-                {{ tweet }}
-                
-              </p>  -->
-              <div id="feed">
-                <!-- <blockquote class="twitter-tweet">
-                  <p lang="en" dir="ltr">Sunsets don&#39;t get much better than this one over 
-                    <a href="https://twitter.com/GrandTetonNPS?ref_src=twsrc%5Etfw">@GrandTetonNPS</a>. 
-                    <a href="https://twitter.com/hashtag/nature?src=hash&amp;ref_src=twsrc%5Etfw">#nature</a> 
-                    <a href="https://twitter.com/hashtag/sunset?src=hash&amp;ref_src=twsrc%5Etfw">#sunset</a> 
-                    <a href="http://t.co/YuKy2rcjyU">
-                      pic.twitter.com/YuKy2rcjyU
-                    </a>
-                  </p>&mdash; US Department of the Interior (@Interior) 
-                  <a href="https://twitter.com/Interior/status/463440424141459456?ref_src=twsrc%5Etfw">May 5, 2014</a>
-                </blockquote>
-                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
+  <head>
+    <link rel="stylesheet" href="./bootstrap.min.css">
+    <link rel="stylesheet" href="./tab.css">
+    <link rel="stylesheet" href="./all.css">
+    <link rel="stylesheet" href="./inter.css">
+    
+  </head>
 
-                <!-- <iframe border=0 frameborder=0 height=250 width=550
-                  src="https://twitframe.com/show?url=https://twitter.com/Interior/status/463440424141459456?ref_src=twsrc%5Etfw"></iframe> -->     
-                  <!-- <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" class="" style="position: static; visibility: visible; width: 600px; height: 700px; display: block; flex-grow: 1;" title="Twitter Tweet" src="https://platform.twitter.com/embed/Tweet.html?dnt=false&amp;embedId=twitter-widget-0&amp;frame=false&amp;hideCard=false&amp;hideThread=false&amp;id=766268659811483650&amp;lang=en&amp;origin=chrome-extension%3A%2F%2Fgmoaocclfjmbjochoekgalcdplokjfnh%2Ftab%2Ftab.html%23%2Fpopulation&amp;theme=light&amp;widgetsVersion=e1ffbdb%3A1614796141937&amp;width=600px" data-tweet-id="789165566485422080">
-                  </iframe> -->
-              </div>  
-            <!-- </div> -->            
-          </div>
-    </body>
+  <body style="background-color: white;">
+    <div id="page" class="md:w-full h-full">
+      <div style="position: -webkit-sticky; position: sticky; top: 0; background-color: white;">
+        <!-- Population title -->
+        <div class="px-5 py-3 border-b border-lighter flex items-center justify-between">
+          <h1 class="text-xl font-bold">Population</h1>
+          <!-- <i class="fas fa-globe-europe text-xl text-blue"></i> -->
+        </div>
+        
+        <!-- Filters for Population's Segmentation.	
+              The filters are: age, country, party, gender and race -->
+        <div style="margin-bottom: 1px; margin-left: 14px;">Please Choose Your Filters:</div>
+
+        <div>
+          <select
+            id="age"
+            class="mb-2"
+            style="
+              border: 2px solid #ced4da;
+              width: 31%;
+              margin-top: 1px;
+              margin-bottom: 1px;
+              margin-right: 5px;
+              margin-left: 14px;
+            "
+          ></select>
+
+          <select
+            id="country"
+            class="mb-2"
+            style="
+              border: 2px solid #ced4da;
+              width: 31%;
+              margin-top: 1px;
+              margin-bottom: 1px;
+              margin-right: 5px;
+            "
+          ></select>
+
+          <select
+            id="gender"
+            class="mb-2"
+            style="
+              border: 2px solid #ced4da;
+              width: 31%;
+              margin-top: 1px;
+              margin-right: 5px;
+            "
+          ></select>
+
+          <select
+            id="party"
+            class="mb-2"
+            style="
+              border: 2px solid #ced4da;
+              width: 31%;
+              margin-top: 1px;
+              margin-right: 5px;
+              margin-left: 14px;
+            "
+          ></select>
+
+          <select
+            id="race"
+            class="mb-2"
+            style="
+              border: 2px solid #ced4da;
+              width: 31%;
+              margin-top: 1px;
+              margin-right: 5px;
+            "
+          ></select>
+        </div>
+
+        <!-- Buttons for search and reset  -->
+        <div>
+          <button
+            type="submit"
+            class="h-10 px-4 text-white font-semibold bg-blue hover:bg-darkblue focus:outline-none rounded-full relative right-0"
+            id="search"
+            style="position: relative; left: 62%"
+          >
+            Search
+          </button>
+  
+          <button
+            type="submit"
+            class="h-10 px-4 text-white font-semibold bg-blue hover:bg-darkblue focus:outline-none rounded-full relative right-0"
+            id="reset"
+            style="position: relative; left: 65%"
+          >
+            Reset
+          </button>
+
+          <div class="px-5 py-1 border-b border-lighter"></div>
+        </div>
+      </div>
+      
+      <!-- this is where the tweets are displayed -->
+      <div id="feed" style="margin-left: 14px;"></div>          
+    </div>
+    <script src="population.js"></script>
+  </body>   
 </html>

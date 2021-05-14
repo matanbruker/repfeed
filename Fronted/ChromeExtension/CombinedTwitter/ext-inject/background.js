@@ -182,61 +182,12 @@
 /******/ 	return __webpack_require__(__webpack_require__.s = "./background.js");
 /******/ })
 
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
-    console.log(request);
-    console.log(sender);
-    if(request.cmd == "read_file_repfeed") {
-        $.ajax({
-            url: chrome.extension.getURL("repfeed.html"),
-            dataType: "html",
-            success: sendResponse
-        });
-    }
-    else if(request.cmd == "read_file_population") {
-        $.ajax({
-            url: chrome.extension.getURL("population.html"),
-            dataType: "html",
-            success: sendResponse
-        });
-    }
-})
-
-//let activated = false;
- let tab_id = 0;
-// chrome.tabs.onActivated.addListener(tab => {
-//     chrome.tabs.get(tab.tabId, current_tab_info => {
-//         if(/http(?:s)?:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/.test(current_tab_info.url) && !activated){
-//             activated = true;
-//             console.log("activated");
-//             tab_id = tab.tabId;
-//             chrome.tabs.executeScript(null, {file: './foreground.js'}, () => console.log('injected'));
-//         }
-//     });
-// });
-function hello() {
-    chrome.tabs.executeScript(null, { file: "./widgets.js" }, function () {
-        chrome.tabs.executeScript(null, { file: "./widgets.js" });
-    });
-  }
-  hello();
-let updated = false;
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     chrome.tabs.get(tabId, current_tab_info => {
-        if(/http(?:s)?:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/.test(current_tab_info.url) && !updated){
-            updated = true;
-            tab_id = tabId;
+        if(/http(?:s)?:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/.test(current_tab_info.url) && changeInfo.status == 'complete'){
             setTimeout(function () {
-                console.log('updated');
                 chrome.tabs.executeScript(null, {file: './foreground.js'}, () => console.log('injected'));
             }, 1000);
         }
     });
- }); 
-
-chrome.tabs.onRemoved.addListener(function(tabId, removeInfo) {
-    if(tab_id == tabId) {
-        console.log('removed');
-        updated = false;
-        //activated = false;
-    }
-});
+ });

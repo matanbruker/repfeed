@@ -1,179 +1,165 @@
-document.write( '<template>\n' );
-document.write( '  <div class=\"md:w-full h-full\" >\n' );
-document.write( '    <div  style=\"position: -webkit-sticky;position: sticky;top:0;background-color:white;\">\n' );
-document.write( '      <!-- Repfeed title -->\n' );
-document.write( '      <div\n' );
-document.write( '        class=\"px-5 py-3 border-b border-lighter flex items-center justify-between\"\n' );
-document.write( '      >\n' );
-document.write( '        <h1 class=\"text-xl font-bold\">RepFeed</h1>\n' );
-document.write( '        <i class=\"fas fa-balance-scale text-xl text-blue\"></i>\n' );
-document.write( '      </div>\n' );
-document.write( '      <!-- slide bar -->\n' );
-document.write( '      <div class=\"px-1\">\n' );
-document.write( '        <VueSlideBar\n' );
-document.write( '          v-model=\"slider.value\"\n' );
-document.write( '          :data=\"slider.data\"\n' );
-document.write( '          @dragEnd=\"update_value\"\n' );
-document.write( '          @callbackRange=\"callbackRange\"\n' );
-document.write( '        />\n' );
-document.write( '      </div>\n' );
-document.write( '      <!-- reset button -->\n' );
-document.write( '      <div\n' );
-document.write( '        class=\"px-5 py-6 border-b border-lighter flex items-center justify-between\"\n' );
-document.write( '      >\n' );
-document.write( '        <button\n' );
-document.write( '          submit\n' );
-document.write( '          class=\"h-10 px-4 text-white font-semibold bg-blue hover:bg-darkblue focus:outline-none rounded-full relative right-0\"\n' );
-document.write( '          @click=\"update_res()\"\n' );
-document.write( '          style=\"position: relative; left: 80%; top: 15px\"\n' );
-document.write( '        >\n' );
-document.write( '          Reset\n' );
-document.write( '        </button>\n' );
-document.write( '      </div>\n' );
-document.write( '    </div>\n' );
-document.write( '    <!-- feed tweet -->\n' );
-document.write( '    <div v-if=\"this.error_message.length != 0\">\n' );
-document.write( '      <p class=\"px-5 py-6 border-b border-lighter\" style=\"margin-top: 15px\">\n' );
-document.write( '        {{ this.error_message }}\n' );
-document.write( '      </p>\n' );
-document.write( '    </div>\n' );
-document.write( '    <div v-if=\"this.load === true\">\n' );
-document.write( '      <div class=\"text-center\" style=\"margin-top: 50px\">\n' );
-document.write( '        <div\n' );
-document.write( '          class=\"spinner-border text-primary\"\n' );
-document.write( '          style=\"width: 80px; height: 80px\"\n' );
-document.write( '          role=\"status\"\n' );
-document.write( '        ></div>\n' );
-document.write( '      </div>\n' );
-document.write( '    </div>\n' );
-document.write( '      <div id=\"feed\"></div>  \n' );
-document.write( '  </div>\n' );
-document.write( '</template>\n' );
-document.write( '\n' );
-document.write( '<script>\n' );
-document.write( 'import axios from \"axios\";\n' );
-document.write( '\n' );
-document.write( 'window.twttr = (function(d, s, id) {\n' );
-document.write( '  var js, fjs = d.getElementsByTagName(s)[0],\n' );
-document.write( '    t = window.twttr || {};\n' );
-document.write( '  if (d.getElementById(id)) return t;\n' );
-document.write( '  js = d.createElement(s);\n' );
-document.write( '  js.id = id;\n' );
-document.write( '  js.src = \"https://platform.twitter.com/widgets.js\";\n' );
-document.write( '  fjs.parentNode.insertBefore(js, fjs);\n' );
-document.write( '\n' );
-document.write( '  t._e = [];\n' );
-document.write( '  t.ready = function(f) {\n' );
-document.write( '    t._e.push(f);\n' );
-document.write( '  };\n' );
-document.write( '\n' );
-document.write( '  return t;\n' );
-document.write( '}(document, \"script\", \"twitter-wjs\"));\n' );
-document.write( 'const url = \"https://icc.ise.bgu.ac.il/RepFeed/repfeed/\";\n' );
-document.write( '\n' );
-document.write( 'export default {\n' );
-document.write( '  name: \"repFeed\",\n' );
-document.write( '  data() {\n' );
-document.write( '    return {\n' );
-document.write( '      load: false,\n' );
-document.write( '      feed: \"\",\n' );
-document.write( '      error_message: \"\",\n' );
-document.write( '      slider: {\n' );
-document.write( '        value: 0,\n' );
-document.write( '        data: [\n' );
-document.write( '          -1,\n' );
-document.write( '          -0.9,\n' );
-document.write( '          -0.8,\n' );
-document.write( '          -0.7,\n' );
-document.write( '          -0.6,\n' );
-document.write( '          -0.5,\n' );
-document.write( '          -0.4,\n' );
-document.write( '          -0.3,\n' );
-document.write( '          -0.2,\n' );
-document.write( '          -0.1,\n' );
-document.write( '          0,\n' );
-document.write( '          0.1,\n' );
-document.write( '          0.2,\n' );
-document.write( '          0.3,\n' );
-document.write( '          0.4,\n' );
-document.write( '          0.5,\n' );
-document.write( '          0.6,\n' );
-document.write( '          0.7,\n' );
-document.write( '          0.8,\n' );
-document.write( '          0.9,\n' );
-document.write( '          1,\n' );
-document.write( '        ],\n' );
-document.write( '      },\n' );
-document.write( '    };\n' );
-document.write( '  },\n' );
-document.write( '  methods: {\n' );
-document.write( '    async update_res() {\n' );
-document.write( '      this.load = true;\n' );
-document.write( '      this.feed = \"\";\n' );
-document.write( '      document.getElementById(\'feed\').innerHTML = \"\";\n' );
-document.write( '      //document.getElementById(\'feed\').style.visibility = \"hidden\"\n' );
-document.write( '      this.error_message = \"\";\n' );
-document.write( '      // send Get request \n' );
-document.write( '      try {\n' );
-document.write( '        this.slider.value = 0;\n' );
-document.write( '        const response = await axios.get(url + \"reset\");\n' );
-document.write( '\n' );
-document.write( '        // if the backend returns empty list, set an error message\n' );
-document.write( '        if (response.data.length != 0) {\n' );
-document.write( '          for (let tweet in response.data){\n' );
-document.write( '            console.log(tweet)\n' );
-document.write( '            window.twttr.widgets.createTweet( response.data[tweet] , document.getElementById(\"feed\"));\n' );
-document.write( '          }\n' );
-document.write( '          this.feed = response.data;\n' );
-document.write( '        } else {\n' );
-document.write( '          this.error_message = \"Sorry no result for your request\";\n' );
-document.write( '        }\n' );
-document.write( '\n' );
-document.write( '        //document.getElementById(\'feed\').style.visibility = \"visible\";\n' );
-document.write( '        this.load = false;\n' );
-document.write( '      } catch (error) {\n' );
-document.write( '        console.log(error);\n' );
-document.write( '      }\n' );
-document.write( '    },\n' );
-document.write( '\n' );
-document.write( '    async update_value() {\n' );
-document.write( '      this.load = true;\n' );
-document.write( '      document.getElementById(\'feed\').innerHTML = \"\";\n' );
-document.write( '      //document.getElementById(\'feed\').style.visibility = \"hidden\"\n' );
-document.write( '      // send Get request \n' );
-document.write( '      try {\n' );
-document.write( '        this.feed = \"\";\n' );
-document.write( '        this.error_message = \"\";\n' );
-document.write( '        console.log(this.slider.value);\n' );
-document.write( '        const response = await axios.get(\n' );
-document.write( '          url + this.slider.value\n' );
-document.write( '        );\n' );
-document.write( '\n' );
-document.write( '        // if the backend returns empty list, set an error message\n' );
-document.write( '        if (response.data.length != 0) {\n' );
-document.write( '          for (let tweet in response.data){\n' );
-document.write( '            console.log(tweet)\n' );
-document.write( '            window.twttr.widgets.createTweet( response.data[tweet] , document.getElementById(\"feed\"));\n' );
-document.write( '          }\n' );
-document.write( '          this.feed = response.data;\n' );
-document.write( '        } else {\n' );
-document.write( '          this.error_message = \"Sorry no result for your request\";\n' );
-document.write( '        }\n' );
-document.write( '\n' );
-document.write( '        //document.getElementById(\'feed\').style.visibility = \"visible\";\n' );
-document.write( '        this.load = false;\n' );
-document.write( '      } catch (error) {\n' );
-document.write( '        console.log(error);\n' );
-document.write( '      }\n' );
-document.write( '    },\n' );
-document.write( '    callbackRange(val) {\n' );
-document.write( '      console.log(val);\n' );
-document.write( '      this.slider.value = val;\n' );
-document.write( '    },\n' );
-document.write( '  },\n' );
-document.write( '};\n' );
-document.write( '</script>\n' );
-document.write( '<style>\n' );
-document.write( '</style> \n' );
-document.write( '\n' );
-document.write( '\n' );
+const repfeed_url = "https://icc.ise.bgu.ac.il/RepFeed/repfeed/";
+let tweets_array;
+let counter = 0;
+
+function more_twwets(start_inx=0){
+  for (tweet=start_inx; tweet<start_inx+10; tweet++){
+      if(tweet == tweets_array.length-1){
+          return 
+      }
+
+      if(tweets_array[tweet].includes('[')){
+        tweets_array[tweet] = tweets_array[tweet].replace('[', '');
+      }
+
+      if(tweets_array[tweet].includes(']')){
+        tweets_array[tweet] = tweets_array[tweet].replace(']', '');
+      }
+
+      tweets_array[tweet] = tweets_array[tweet].replace('"', '');
+      tweets_array[tweet] = tweets_array[tweet].replace('"', '');
+      
+      // create_feed(tweets_array[tweet]);
+      var blockquote = document.createElement("blockquote");
+      blockquote.setAttribute("class", "twitter-tweet");
+      var a = document.createElement("a");
+      a.setAttribute("href", "https://twitter.com/x/status/" + tweets_array[tweet]);
+      blockquote.append(a);
+      var script = document.createElement("script");
+      script.async = true;
+      script.setAttribute("src", "https://platform.twitter.com/widgets.js");
+      script.setAttribute("charset", "utf-8");
+      feed = document.getElementById('feed')
+      feed.appendChild(blockquote);
+      feed.appendChild(script);
+  
+    }
+
+    start_inx = start_inx+10;
+    setTimeout(function(){
+      counter = counter +10;
+      if(counter < 40){
+        more_twwets(start_inx);
+      }
+    },5000)  
+  }
+
+// activated when user reset the slidbar on the repfeed page
+// reset the bar and get tweets with score zero
+async function update_res() {
+    if(document.getElementById('error_message')) {
+      document.getElementById('error_message').remove();
+    }
+    
+    counter = 0;
+    create_spinner();
+    slide = document.getElementById('slide');
+    document.getElementById('feed').innerHTML = "";
+    this.error_message = "";
+    
+    slide.value = 0;
+    const range = document.getElementById('slide'), rangeV = document.getElementById('rangeV'),
+    setValue = ()=>{
+      const newValue = Number( (range.value - range.min) * 100 / (range.max - range.min) ), newPosition = 10 - (newValue * 0.2);
+      rangeV.innerHTML = `<span>${range.value}</span>`;
+      rangeV.style.left = `calc(${newValue}% + (${newPosition}px))`;
+    };
+    setValue();
+  
+    // send Get request 
+    const response = await fetch(repfeed_url + "reset", { method: 'GET',})
+    .then(response => response.text())
+    .then((response) => {
+    // if the backend returns empty list, set an error message
+    if (response.length != 2) {//the lengh is 2 because it is the length of empty arry
+      // clean respond
+      tweets_array = response.split(",");
+      more_twwets();
+    } else {
+      create_error_message();
+    }
+    // stop spinner
+    document.getElementById('spinner').remove();
+  })
+    .catch ((error) => {
+    console.log(error);
+  })
+}
+  
+  //activated when user choose value in the slidbar
+  //present to user tweets according to the score the user chose
+  async function update_value() {
+    if(document.getElementById('error_message')) {
+      document.getElementById('error_message').remove();
+    }
+
+    counter = 0;
+    create_spinner();
+    slide = document.getElementById('slide');
+    document.getElementById('feed').innerHTML = "";
+    this.error_message = "";
+
+      // send Get request 
+    const response = await fetch(repfeed_url + slide.value, {method: 'GET',})
+      .then(response => response.text())
+      .then((response) => {
+      // if the backend returns empty list, set an error message
+        if (response.length != 2) {//the lengh is 2 because it is the length of empty arry
+          //clean respond
+          tweets_array = response.split(",");
+          more_twwets();
+        }  else {
+          create_error_message();
+        }
+        // stop spinner
+        document.getElementById('spinner').remove();
+      }) 
+      .catch ((error) => {
+        console.log(error);
+      })
+  }
+  
+  // display the spinner
+  function create_spinner() {
+    container_div = document.createElement('div');
+    container_div.setAttribute("id", "spinner");
+    container_text = document.createElement('div');
+    container_text.setAttribute("class", "text-center");
+    container_text.setAttribute("style", "margin-top: 50px");
+    spinner = document.createElement('div');
+    spinner.setAttribute("class", "spinner-border text-primary");
+    spinner.setAttribute("style", "width: 80px; height: 80px");
+    spinner.setAttribute("role", "status");
+    container_text.append(spinner);
+    container_div.append(container_text);
+    document.getElementById('page').append(container_div);
+  }
+
+  // display error message
+  function create_error_message() {
+    // console.log("enter error");
+    this.error_message = "Sorry! No result for your request";
+    container_error = document.createElement('div');
+    container_error.setAttribute("id", "error_message");
+    text = document.createElement('p');
+    text.setAttribute("class", "px-5 py-6 border-b border-lighter");
+    text.setAttribute("style", "margin-top: 15px; font-weight:bold; text-align: center;");
+    text.setAttribute("id", "error_message_txt");
+    text.setAttribute("id", "error_message_txt");
+    text.textContent = error_message;
+    container_error.append(text);
+    document.getElementById('page').append(container_error);
+  }
+
+  slide = document.getElementById('slide').addEventListener("click", update_value);
+  res_slide_btn = document.getElementById('res_slide').addEventListener("click", update_res)
+  const range = document.getElementById('slide'), rangeV = document.getElementById('rangeV'),
+  setValue = ()=>{
+    const newValue = Number( (range.value - range.min) * 100 / (range.max - range.min) ),
+    newPosition = 10 - (newValue * 0.2);
+    rangeV.innerHTML = `<span>${range.value}</span>`;
+    rangeV.style.left = `calc(${newValue}% + (${newPosition}px))`;
+  };
+  setValue();
+  document.addEventListener("DOMContentLoaded", setValue);
+  range.addEventListener('input', setValue);

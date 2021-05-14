@@ -44,7 +44,6 @@ You may choose any combination of the filters below:
 -	Party – present options of the parties that exist in USA.
 -	Race – present option of the existing races in the US.
 <br>
-<br>
 For example, if you use the "Party" filter and choose "Democrat", the system will show you tweets by the point of view of Democrats.
 <br>
 You may choose multiple number of filters.

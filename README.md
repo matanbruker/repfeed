@@ -3,6 +3,8 @@
 RepFeed is a project of Node.js and Vue.js which presents an interface that allows the user to control the political tweets to which he wants to be exposed and allows the user to see tweets of a particular population segment by selecting filters.<br>
 
 The information displayed in the project is retrieved using SQL queries and verified by the Twitter API.
+<br>
+<br>
 
 ## Downlaod Feature
 
@@ -14,11 +16,14 @@ For download please click on the following link:** [RepFeed Feature](https://chr
 <br>
 For adding the extension to the browser, click the on the blue button that says: Add to Chrome.
 <br>
+<br>
 
 ## Start Work With RepFeed!
 After the installation, please make sure that the extension is active. If not, you may click on the extension's icon for make it active. 
 <br>
 Now, you may visit twitter website. You may click on the following link:  [Twitter](https://twitter.com/home)
+
+<br>
 
 ## What Can You Do With The RepFeed Feature?
 You could notice that on the left side of the page, in the navigation bar, 2 new tabs where added:

@@ -1,4 +1,4 @@
-const url = "https://icc.ise.bgu.ac.il/RepFeed/population/";
+const url = "https://rps.ise.bgu.ac.il/RepFeed/population/";
 let tweets_array;
 let counter = 0;
 let start_inx = 0;

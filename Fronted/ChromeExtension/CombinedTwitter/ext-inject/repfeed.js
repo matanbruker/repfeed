@@ -1,4 +1,4 @@
-const repfeed_url = "https://icc.ise.bgu.ac.il/RepFeed/repfeed/";
+const repfeed_url = "https://rps.ise.bgu.ac.il/RepFeed/repfeed/";
 let tweets_array;
 let counter = 0;
 

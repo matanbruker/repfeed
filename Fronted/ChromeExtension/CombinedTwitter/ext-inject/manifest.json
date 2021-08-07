@@ -1,6 +1,6 @@
 {
     "name": "RepFeed",
-    "description": "This extension will give you the ability to see political tweets according to your prefercnces. The user required to choose values from the relevant filters and click on search button. The extention will present to the user relevant tweets according to the filter values the user chose. This extension is part of university project and its purpses are for research.",
+    "description": "This extension will give you the ability to see political tweets according to your prefercnces.",
     "version": "0.0.1",
     "manifest_version" : 2,
     "icons": {
